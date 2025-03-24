@@ -11,10 +11,31 @@ import Footer from '../components/layout/Footer';
 const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Add a dynamic background animation
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      
+      document.documentElement.style.setProperty('--mouse-x', x.toString());
+      document.documentElement.style.setProperty('--mouse-y', y.toString());
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   return (
-    <>
+    <div className="relative bg-gradient-to-br from-white to-primary-50">
+      {/* Animated background elements */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#042652]/10 rounded-full filter blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#FF7E3D]/10 rounded-full filter blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+      </div>
+      
       <Header />
       <main>
         <Hero />
@@ -24,7 +45,7 @@ const Index = () => {
         <VisionMission />
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -26,6 +26,32 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        yugrow: {
+          DEFAULT: "#042652",
+          50: "#0A4A8C",
+          100: "#084076",
+          200: "#063561",
+          300: "#052D53",
+          400: "#042652",
+          500: "#031E40", 
+          600: "#021633",
+          700: "#010E27",
+          800: "#01061A",
+          900: "#00030D",
+        },
+        orange: {
+          DEFAULT: "#FF7E3D",
+          50: "#FFF8F3",
+          100: "#FFEAD9",
+          200: "#FFD0B0",
+          300: "#FFB688",
+          400: "#FF9C60",
+          500: "#FF7E3D",
+          600: "#FF570A",
+          700: "#D63D00",
+          800: "#9E2D00",
+          900: "#661D00",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -112,6 +138,19 @@ export default {
           "0%": { transform: "scale(0.95)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" },
         },
+        "pulse": {
+          "0%": { opacity: "1" },
+          "50%": { opacity: "0.7" },
+          "100%": { opacity: "1" },
+        },
+        "bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" }
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-15px)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -121,6 +160,9 @@ export default {
         "slide-in": "slide-in 0.6s ease-out",
         "slide-up": "slide-up 0.6s ease-out",
         "scale-in": "scale-in 0.4s ease-out",
+        "pulse": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "bounce": "bounce 2s ease-in-out infinite",
+        "float": "float 5s ease-in-out infinite",
       },
     },
   },

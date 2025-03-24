@@ -2,37 +2,45 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Button from '../ui/Button';
+import { Button } from '@/components/ui/button';
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-br from-white to-primary-50 pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwQTdBRTYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptNiA2djZoNnYtNmgtNnptLTEyIDBoNnY2aC02di02em0xMiAwaDZ2NmgtNnYtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50"></div>
+    <section className="relative bg-gradient-to-br from-[#042652] to-[#0a4a8c] pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptNiA2djZoNnYtNmgtNnptLTEyIDBoNnY2aC02di02em0xMiAwaDZ2NmgtNnYtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50"></div>
       
       <div className="container relative mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 space-y-6 md:pr-8 animate-slide-in">
-            <div className="inline-block bg-primary-100 text-primary-700 px-4 py-1 rounded-full text-sm font-medium">
+            <div className="flex items-center mb-2">
+              <img 
+                src="/public/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
+                alt="Yugrow Pharmacy Logo" 
+                className="h-14 md:h-16 animate-pulse"
+              />
+            </div>
+            
+            <div className="inline-block bg-white/10 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
               Leading Generic Medicine Manufacturer
             </div>
             
-            <h1 className="heading-xl text-gray-900">
-              Yugrow Pharmacy
-              <span className="block text-primary mt-2">Affordable Healthcare, Quality Medicines</span>
+            <h1 className="heading-xl text-white">
+              Affordable Healthcare
+              <span className="block text-[#FF7E3D] mt-2 animate-pulse">Quality Medicines for All</span>
             </h1>
             
-            <p className="text-lg text-gray-600 max-w-lg">
+            <p className="text-lg text-white/90 max-w-lg">
               Providing high-quality, affordable generic medicines to enhance healthcare accessibility across India. WHO-GMP certified manufacturing with a commitment to excellence.
             </p>
             
             <div className="flex flex-wrap gap-4 pt-2">
               <Link to="/contact">
-                <Button size="lg" icon={<ArrowRight size={18} />} iconPosition="right">
-                  Enquire Now
+                <Button size="lg" className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white flex items-center gap-2">
+                  Enquire Now <ArrowRight size={18} />
                 </Button>
               </Link>
               <Link to="/partner">
-                <Button size="lg" variant="outline">
+                <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10">
                   Become Our Partner
                 </Button>
               </Link>
@@ -41,15 +49,15 @@ const Hero = () => {
           
           <div className="mt-12 md:mt-0 md:w-1/2 animate-fade-in">
             <div className="relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-300 to-primary-500 rounded-2xl blur opacity-30"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF7E3D] to-[#FF7E3D]/50 rounded-2xl blur opacity-30"></div>
               <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1563453392212-326f5e854473?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" 
+                  src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" 
                   alt="Yugrow Pharmacy medicines" 
                   className="w-full h-80 md:h-96 object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-lg">
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#FF7E3D] rounded-full flex items-center justify-center shadow-lg animate-bounce">
                 <div className="text-white text-center">
                   <div className="text-xl font-bold">30-80%</div>
                   <div className="text-xs">Lower Prices</div>
