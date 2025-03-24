@@ -37,7 +37,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="section-padding bg-gradient-to-b from-[#0A4A8C] to-[#042652]" id="why-choose-us">
+    <section className="section-padding bg-gradient-to-b from-[#0A4A8C] to-[#042652] dark:from-[#063561] dark:to-[#021633] transition-colors duration-300" id="why-choose-us">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="heading-lg text-white mb-4">Why Choose Yugrow Pharmacy?</h2>
@@ -50,10 +50,10 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="glass-card bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-scale-in"
+              className="glass-card bg-white/10 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/10 p-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 animate-scale-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-lg bg-white/10">
+              <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-lg bg-white/10 dark:bg-white/5">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>

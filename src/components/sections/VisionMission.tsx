@@ -4,7 +4,7 @@ import { Eye, Target } from 'lucide-react';
 
 const VisionMission = () => {
   return (
-    <section className="section-padding bg-gradient-to-br from-primary-700 to-primary-900 text-white">
+    <section className="section-padding bg-gradient-to-br from-primary-700 to-primary-900 dark:from-primary-800 dark:to-primary-900 text-white transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="heading-lg mb-4">Our Vision & Mission</h2>
@@ -14,7 +14,7 @@ const VisionMission = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 animate-slide-up">
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/20 animate-slide-up transition-all duration-300 hover:bg-white/15 dark:hover:bg-white/10">
             <div className="flex items-center mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white/20 mr-4">
                 <Eye className="h-6 w-6 text-white" />
@@ -46,7 +46,7 @@ const VisionMission = () => {
             </ul>
           </div>
           
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/20 animate-slide-up transition-all duration-300 hover:bg-white/15 dark:hover:bg-white/10" style={{ animationDelay: "0.2s" }}>
             <div className="flex items-center mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white/20 mr-4">
                 <Target className="h-6 w-6 text-white" />

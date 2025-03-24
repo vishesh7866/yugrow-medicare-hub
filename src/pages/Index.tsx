@@ -7,6 +7,7 @@ import OurApproach from '../components/sections/OurApproach';
 import VisionMission from '../components/sections/VisionMission';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const Index = () => {
   useEffect(() => {
@@ -29,11 +30,16 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="relative bg-gradient-to-br from-white to-primary-50">
+    <div className="relative bg-gradient-to-br from-white to-primary-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+      {/* Theme toggle */}
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+      
       {/* Animated background elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#042652]/10 rounded-full filter blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#FF7E3D]/10 rounded-full filter blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#042652]/10 dark:bg-[#076FD8]/20 rounded-full filter blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#FF7E3D]/10 dark:bg-[#FF7E3D]/20 rounded-full filter blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
       
       <Header />

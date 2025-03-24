@@ -96,11 +96,39 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  
+  /* Animated background for dark mode */
+  .dark body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(10, 74, 140, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255, 126, 61, 0.1) 0%, transparent 50%);
+    animation: darkBackground 20s ease infinite alternate;
+  }
+  
+  @keyframes darkBackground {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
 }
 
 @layer utilities {
   .glass-card {
     @apply bg-white/90 backdrop-blur-sm border border-white/20 shadow-md;
+  }
+  
+  .dark .glass-card {
+    @apply bg-gray-900/40 backdrop-blur-sm border border-white/5 shadow-xl;
   }
   
   .text-balance {
@@ -181,5 +209,36 @@
   
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Dark mode specific animations */
+  .dark .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 5px -5px #FF7E3D;
+    }
+    to {
+      box-shadow: 0 0 15px 5px #FF7E3D;
+    }
+  }
+  
+  /* Enhanced animation for dark mode */
+  .dark .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(2deg);
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
   }
 }
