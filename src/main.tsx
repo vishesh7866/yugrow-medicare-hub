@@ -5,7 +5,7 @@ import App from './App.tsx';
 import './index.css';
 
 createRoot(document.getElementById("root")!).render(
-  <ThemeProvider defaultTheme="light" storageKey="yugrow-theme">
+  <ThemeProvider defaultTheme="dark" storageKey="yugrow-theme">
     <App />
   </ThemeProvider>
 );

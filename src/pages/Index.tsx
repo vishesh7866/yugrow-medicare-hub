@@ -7,12 +7,12 @@ import OurApproach from '../components/sections/OurApproach';
 import VisionMission from '../components/sections/VisionMission';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { useTheme } from '@/components/theme-provider';
 
 const Index = () => {
+  const { theme } = useTheme();
+  
   useEffect(() => {
-    window.scrollTo(0, 0);
-    
     // Add a dynamic background animation
     const handleMouseMove = (e: MouseEvent) => {
       const x = e.clientX / window.innerWidth;
@@ -31,11 +31,6 @@ const Index = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-white to-primary-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
-      {/* Theme toggle */}
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
-      
       {/* Animated background elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#042652]/10 dark:bg-[#076FD8]/20 rounded-full filter blur-3xl animate-float"></div>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,9 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#042652]/90 backdrop-blur shadow-lg' : 'bg-transparent'
+        scrolled 
+          ? 'bg-[#042652]/90 backdrop-blur shadow-lg' 
+          : 'bg-[#042652]/70 backdrop-blur-sm dark:bg-[#021633]/80'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -48,7 +51,7 @@ const Header = () => {
             className="flex items-center"
           >
             <img 
-              src="/public/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
+              src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
               alt="Yugrow Pharmacy Logo" 
               className="h-10 md:h-12 transform hover:scale-105 transition-transform"
             />
@@ -72,22 +75,26 @@ const Header = () => {
             <Link to="/contact">
               <Button className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">Enquire Now</Button>
             </Link>
+            <ThemeToggle />
           </nav>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white"
-            onClick={toggleMenu}
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center space-x-4 md:hidden">
+            <ThemeToggle />
+            <button
+              className="text-white"
+              onClick={toggleMenu}
+              aria-label="Toggle Menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="fixed inset-0 bg-[#042652] z-40 pt-16 md:hidden animate-fade-in">
+        <div className="fixed inset-0 bg-[#042652] dark:bg-[#021633] z-40 pt-16 md:hidden animate-fade-in">
           <nav className="container mx-auto px-4 py-8 flex flex-col space-y-6">
             {navItems.map((item) => (
               <Link
