@@ -12,14 +12,6 @@ const Hero = () => {
       <div className="container relative mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 space-y-6 md:pr-8 animate-slide-in">
-            <div className="flex items-center mb-2">
-              <img 
-                src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
-                alt="Yugrow Pharmacy Logo" 
-                className="h-14 md:h-16 animate-pulse"
-              />
-            </div>
-            
             <div className="inline-block bg-white/10 dark:bg-white/5 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
               Leading Generic Medicine Manufacturer
             </div>
@@ -51,15 +43,11 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF7E3D] to-[#FF7E3D]/50 rounded-2xl blur opacity-30 animate-glow"></div>
               <div className="relative bg-white/5 dark:bg-gray-800/20 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
-                <video 
-                  autoPlay 
-                  muted 
-                  loop 
+                <img 
+                  src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88" 
+                  alt="Medicine production facility"
                   className="w-full h-80 md:h-96 object-cover opacity-90"
-                >
-                  <source src="https://static.videezy.com/system/resources/previews/000/046/642/original/Lab18.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6">
                   <p className="text-white text-lg font-medium">Advanced pharmaceutical manufacturing and research</p>
                 </div>
