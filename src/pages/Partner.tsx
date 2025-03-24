@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { CheckCircle, Store, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -61,8 +60,8 @@ const Partner = () => {
               <p className="text-xl text-gray-600 mb-8">
                 Join our successful network of 300+ pharmacy outlets across India and be part of our mission to make healthcare affordable.
               </p>
-              <Button size="lg" icon={<ArrowRight size={18} />} iconPosition="right">
-                Apply for Franchise
+              <Button size="lg" className="flex items-center gap-2">
+                Apply for Franchise <ArrowRight size={18} />
               </Button>
             </div>
           </div>

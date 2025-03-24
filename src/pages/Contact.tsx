@@ -1,7 +1,6 @@
-
 import React, { useEffect } from 'react';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
-import Button from '../components/ui/Button';
+import { Button } from '@/components/ui/button';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 
@@ -200,8 +199,8 @@ const Contact = () => {
                         ></textarea>
                       </div>
                       
-                      <Button icon={<Send size={18} />} iconPosition="right">
-                        Send Message
+                      <Button className="flex items-center gap-2">
+                        Send Message <Send size={18} />
                       </Button>
                     </form>
                   </div>
