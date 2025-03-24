@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { CheckCircle, Store, ArrowRight } from 'lucide-react';
-import Button from '../components/ui/Button';
+import { Button } from '@/components/ui/button';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 
