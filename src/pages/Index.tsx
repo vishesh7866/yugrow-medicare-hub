@@ -5,6 +5,11 @@ import About from '../components/sections/About';
 import WhyChooseUs from '../components/sections/WhyChooseUs';
 import OurApproach from '../components/sections/OurApproach';
 import VisionMission from '../components/sections/VisionMission';
+import Statistics from '../components/sections/Statistics';
+import ProductCategories from '../components/sections/ProductCategories';
+import Testimonials from '../components/sections/Testimonials';
+import FAQ from '../components/sections/FAQ';
+import CallToAction from '../components/sections/CallToAction';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { useTheme } from '@/components/theme-provider';
@@ -46,9 +51,14 @@ const Index = () => {
       <main>
         <Hero />
         <About />
+        <Statistics />
+        <ProductCategories />
         <WhyChooseUs />
         <OurApproach />
+        <Testimonials />
         <VisionMission />
+        <FAQ />
+        <CallToAction />
       </main>
       <Footer />
     </div>
