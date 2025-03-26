@@ -1,96 +1,273 @@
+
 import React, { useEffect } from 'react';
-import { CheckCircle, Store, ArrowRight } from 'lucide-react';
+import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import { useTheme } from '@/components/theme-provider';
+import { motion } from 'framer-motion';
 
 const Partner = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const { theme } = useTheme();
+
   const benefits = [
-    "300+ successful outlets across India",
-    "Largest warehousing setup in the industry",
-    "Low investment, high returns business model",
-    "Comprehensive training and ongoing support",
-    "Cutting-edge inventory management system",
-    "Established brand with growing recognition",
-    "Wide range of generic and branded medicines",
-    "Marketing and promotional assistance"
+    {
+      icon: <Building className="h-10 w-10 text-primary-200" />,
+      title: "300+ Successful Outlets",
+      description: "Join our network of over 300 thriving pharmacy outlets across India"
+    },
+    {
+      icon: <Award className="h-10 w-10 text-primary-200" />,
+      title: "Quality Assurance",
+      description: "We maintain the highest standards with WHO-GMP certified manufacturing"
+    },
+    {
+      icon: <CreditCard className="h-10 w-10 text-primary-200" />,
+      title: "Low Investment, High ROI",
+      description: "Start your pharmacy with minimal capital and see returns quickly"
+    },
+    {
+      icon: <FileCheck className="h-10 w-10 text-primary-200" />,
+      title: "Comprehensive Training",
+      description: "Get thorough training on all aspects of pharmacy management"
+    },
+    {
+      icon: <LayoutDashboard className="h-10 w-10 text-primary-200" />,
+      title: "Inventory Management",
+      description: "Access to cutting-edge inventory management systems"
+    },
+    {
+      icon: <ShieldCheck className="h-10 w-10 text-primary-200" />,
+      title: "Brand Recognition",
+      description: "Leverage our established brand with growing market presence"
+    },
+    {
+      icon: <UserPlus className="h-10 w-10 text-primary-200" />,
+      title: "Marketing Support",
+      description: "Receive extensive marketing and promotional assistance"
+    },
+    {
+      icon: <Settings className="h-10 w-10 text-primary-200" />,
+      title: "Operational Support",
+      description: "Ongoing operational support to ensure smooth functioning"
+    }
   ];
 
   const steps = [
     {
       number: "01",
+      icon: <UserPlus className="h-8 w-8 text-primary" />,
       title: "Application Submission",
-      description: "Fill out our simple enquiry form with your details and location preferences."
+      description: "Fill out our simple enquiry form with your details and location preferences to begin the journey."
     },
     {
       number: "02",
-      title: "Verification & Contact",
-      description: "Our team will verify your details and reach out to discuss the partnership."
+      icon: <Phone className="h-8 w-8 text-primary" />,
+      title: "Initial Consultation",
+      description: "Our team will verify your details and schedule a call to discuss the partnership opportunity."
     },
     {
       number: "03",
-      title: "Location Visit & Feasibility",
-      description: "We'll visit the proposed location to assess its feasibility and potential."
+      icon: <MapPin className="h-8 w-8 text-primary" />,
+      title: "Location Assessment",
+      description: "We'll visit the proposed location to assess its feasibility, foot traffic, and commercial potential."
     },
     {
       number: "04",
-      title: "Approval & Business Start",
-      description: "Once approved, we'll help you set up and launch your Yugrow Pharmacy franchise."
+      icon: <Briefcase className="h-8 w-8 text-primary" />,
+      title: "Business Planning",
+      description: "Develop a customized business plan including investment details, projected returns, and timeline."
+    },
+    {
+      number: "05",
+      icon: <FileCheck className="h-8 w-8 text-primary" />,
+      title: "Agreement & Training",
+      description: "Sign the franchise agreement and begin comprehensive training on pharmacy operations."
+    },
+    {
+      number: "06",
+      icon: <Store className="h-8 w-8 text-primary" />,
+      title: "Store Setup & Launch",
+      description: "Set up your store with our guidance and officially launch your Yugrow Pharmacy franchise."
     }
   ];
 
+  const testimonials = [
+    {
+      name: "Rajesh Sharma",
+      location: "Mumbai, Maharashtra",
+      quote: "Partnering with Yugrow Pharmacy has been transformative for my business. The support and training they provide is unmatched.",
+      avatar: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      name: "Priya Patel",
+      location: "Ahmedabad, Gujarat",
+      quote: "The low investment model and high-quality products have helped me establish a profitable pharmacy in just 6 months.",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      name: "Suresh Kumar",
+      location: "Bangalore, Karnataka",
+      quote: "The inventory management system and marketing support from Yugrow have been key to my franchise's success.",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+    }
+  ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <>
+    <div className="dark:bg-gray-900 min-h-screen">
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-white to-primary-50">
+        <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-[#042652] to-[#0a4a8c] dark:from-[#021633] dark:to-[#063561] text-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-block bg-primary-100 text-primary-700 px-4 py-1 rounded-full text-sm font-medium mb-6">
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="inline-block bg-white/10 text-white px-4 py-1 rounded-full text-sm font-medium mb-6 backdrop-blur-sm"
+              >
                 Franchise Opportunity
-              </div>
-              <h1 className="heading-xl text-gray-900 mb-6">
-                Partner With Yugrow <span className="text-primary">Pharmacy</span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              </motion.div>
+              <motion.h1 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="heading-xl mb-6"
+              >
+                Partner With Yugrow <span className="text-[#FF7E3D]">Pharmacy</span>
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-xl text-white/80 mb-8"
+              >
                 Join our successful network of 300+ pharmacy outlets across India and be part of our mission to make healthcare affordable.
-              </p>
-              <Button size="lg" className="flex items-center gap-2">
-                Apply for Franchise <ArrowRight size={18} />
-              </Button>
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <Button size="lg" className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white flex items-center gap-2">
+                  Apply for Franchise <ArrowRight size={18} />
+                </Button>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+        <section className="py-12 bg-white dark:bg-gray-800">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="bg-primary-50 dark:bg-gray-700 p-6 rounded-xl"
+              >
+                <h3 className="text-3xl font-bold text-primary dark:text-primary-200 mb-2">300+</h3>
+                <p className="text-gray-700 dark:text-gray-300">Stores Nationwide</p>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="bg-primary-50 dark:bg-gray-700 p-6 rounded-xl"
+              >
+                <h3 className="text-3xl font-bold text-primary dark:text-primary-200 mb-2">15+</h3>
+                <p className="text-gray-700 dark:text-gray-300">Years Experience</p>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="bg-primary-50 dark:bg-gray-700 p-6 rounded-xl"
+              >
+                <h3 className="text-3xl font-bold text-primary dark:text-primary-200 mb-2">₹5L+</h3>
+                <p className="text-gray-700 dark:text-gray-300">Avg. Monthly Revenue</p>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="bg-primary-50 dark:bg-gray-700 p-6 rounded-xl"
+              >
+                <h3 className="text-3xl font-bold text-primary dark:text-primary-200 mb-2">25%+</h3>
+                <p className="text-gray-700 dark:text-gray-300">Profit Margin</p>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* FOFO Model Section */}
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="animate-slide-in">
-                <h2 className="heading-lg text-gray-900 mb-6">Franchise Owned, Franchise Operated Model</h2>
-                <p className="text-lg text-gray-600 mb-6">
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="heading-lg text-gray-900 dark:text-white mb-6">Franchise Owned, Franchise Operated Model</h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
                   At Yugrow Pharmacy, we operate on the FOFO (Franchise Owned, Franchise Operated) model, which has proven successful across our network of 300+ outlets in India. This model offers the perfect balance of support and independence.
                 </p>
-                <p className="text-lg text-gray-600 mb-8">
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
                   As a franchise partner, you'll own and operate your store while benefiting from our established brand, extensive supply chain, training, and ongoing support.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-primary-50 p-6 rounded-xl">
-                    <h3 className="text-2xl font-bold text-primary mb-2">300+</h3>
-                    <p className="text-gray-700">Successful outlets across India</p>
+                <div className="flex items-center p-4 bg-primary-50 dark:bg-gray-800 rounded-xl mb-6">
+                  <div className="mr-4 p-3 bg-primary-100 dark:bg-gray-700 rounded-full">
+                    <Store className="h-6 w-6 text-primary dark:text-primary-200" />
                   </div>
-                  <div className="bg-primary-50 p-6 rounded-xl">
-                    <h3 className="text-2xl font-bold text-primary mb-2">15+</h3>
-                    <p className="text-gray-700">Years of industry experience</p>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">FOFO Business Model</h3>
+                    <p className="text-gray-600 dark:text-gray-300">Own your business while leveraging our expertise</p>
                   </div>
                 </div>
-              </div>
-              <div className="relative animate-fade-in">
+                <div className="flex items-center p-4 bg-primary-50 dark:bg-gray-800 rounded-xl">
+                  <div className="mr-4 p-3 bg-primary-100 dark:bg-gray-700 rounded-full">
+                    <BarChart3 className="h-6 w-6 text-primary dark:text-primary-200" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Proven Growth Model</h3>
+                    <p className="text-gray-600 dark:text-gray-300">15+ years of successful business operations</p>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="relative"
+              >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-300 to-primary-500 rounded-2xl blur opacity-30"></div>
                 <div className="relative h-full">
                   <img 
@@ -98,75 +275,196 @@ const Partner = () => {
                     alt="Yugrow Pharmacy store" 
                     className="w-full rounded-2xl shadow-lg"
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                    <div className="flex items-center">
+                      <img 
+                        src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
+                        alt="Yugrow Pharmacy Logo" 
+                        className="h-12 mr-4"
+                      />
+                      <div>
+                        <p className="text-white font-semibold">Yugrow Pharmacy</p>
+                        <p className="text-white/70 text-sm">Mumbai Central Branch</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* Benefits Section */}
-        <section className="section-padding bg-primary-50">
+        <section className="section-padding bg-primary-50 dark:bg-gray-800">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="heading-lg text-gray-900 mb-4">Exclusive Benefits</h2>
-              <p className="text-lg text-gray-600">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="heading-lg text-gray-900 dark:text-white mb-4"
+              >
+                Exclusive Partner Benefits
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg text-gray-600 dark:text-gray-300"
+              >
                 Partner with Yugrow Pharmacy and enjoy these exclusive advantages to grow your business.
-              </p>
+              </motion.p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div 
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
               {benefits.map((benefit, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white rounded-xl p-6 shadow-md flex items-start animate-scale-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                <motion.div 
+                  key={index}
+                  variants={item}
+                  className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-md transition-transform hover:scale-105"
                 >
-                  <CheckCircle className="text-primary mr-3 mt-0.5 flex-shrink-0" size={20} />
-                  <p className="text-gray-700">{benefit}</p>
-                </div>
+                  <div className="flex flex-col items-center text-center">
+                    <div className="mb-4">
+                      {benefit.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">{benefit.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300">{benefit.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="section-padding bg-white dark:bg-gray-900">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="heading-lg text-gray-900 dark:text-white mb-4"
+              >
+                The Partnership Journey
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg text-gray-600 dark:text-gray-300"
+              >
+                A comprehensive six-step process to become a Yugrow Pharmacy franchise partner.
+              </motion.p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {steps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative"
+                >
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-300 to-primary-500 rounded-2xl blur opacity-30"></div>
+                  <div className="relative bg-white dark:bg-gray-800 rounded-xl p-8 border border-primary-100 dark:border-gray-700 h-full">
+                    <div className="flex items-center mb-4">
+                      <div className="bg-primary-100 dark:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                        {step.icon}
+                      </div>
+                      <div className="text-4xl font-bold text-primary-200 dark:text-primary-300">{step.number}</div>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300">{step.description}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* How It Works Section */}
-        <section className="section-padding bg-white">
+        {/* Testimonials Section */}
+        <section className="section-padding bg-primary-50 dark:bg-gray-800">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="heading-lg text-gray-900 mb-4">How It Works</h2>
-              <p className="text-lg text-gray-600">
-                A simple four-step process to become a Yugrow Pharmacy franchise partner.
-              </p>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="heading-lg text-gray-900 dark:text-white mb-4"
+              >
+                Success Stories
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg text-gray-600 dark:text-gray-300"
+              >
+                Hear from our franchise partners about their experience with Yugrow Pharmacy.
+              </motion.p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {steps.map((step, index) => (
-                <div 
-                  key={index} 
-                  className="relative animate-slide-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md"
                 >
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-300 to-primary-500 rounded-2xl blur opacity-30"></div>
-                  <div className="relative bg-white rounded-xl p-8 border border-primary-100 h-full">
-                    <div className="text-4xl font-bold text-primary-200 mb-4">{step.number}</div>
-                    <h3 className="text-xl font-semibold mb-3 text-gray-900">{step.title}</h3>
-                    <p className="text-gray-600">{step.description}</p>
+                  <div className="flex items-center mb-4">
+                    <img 
+                      src={testimonial.avatar} 
+                      alt={testimonial.name} 
+                      className="w-16 h-16 rounded-full object-cover mr-4"
+                    />
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{testimonial.name}</h4>
+                      <p className="text-gray-500 dark:text-gray-400">{testimonial.location}</p>
+                    </div>
                   </div>
-                </div>
+                  <div className="relative">
+                    <svg className="absolute top-0 left-0 w-8 h-8 text-primary-200 opacity-20" fill="currentColor" viewBox="0 0 32 32">
+                      <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                    </svg>
+                    <p className="relative pl-10 text-gray-600 dark:text-gray-300 italic">"{testimonial.quote}"</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Enquiry Form Section */}
-        <section className="section-padding bg-gradient-to-br from-primary-700 to-primary-900 text-white">
+        <section className="section-padding bg-gradient-to-br from-[#042652] to-[#0a4a8c] dark:from-[#021633] dark:to-[#063561] text-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-slide-in">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
                 <h2 className="heading-lg mb-6">Start Your Journey With Yugrow Pharmacy</h2>
                 <p className="text-lg text-white/80 mb-6">
                   Fill out this simple form, and our team will contact you to discuss franchise opportunities in your area.
                 </p>
                 <div className="flex items-center mb-8">
-                  <Store className="h-12 w-12 text-primary-200 mr-4" />
+                  <Store className="h-12 w-12 text-[#FF7E3D] mr-4" />
                   <div>
                     <h3 className="text-xl font-semibold mb-1">FOFO Model</h3>
                     <p className="text-white/80">Franchise Owned, Franchise Operated</p>
@@ -174,20 +472,30 @@ const Partner = () => {
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-start">
-                    <CheckCircle className="text-primary-200 mr-3 mt-1 flex-shrink-0" size={20} />
-                    <p className="text-white/90">Comprehensive training and support</p>
+                    <CheckCircle className="text-[#FF7E3D] mr-3 mt-1 flex-shrink-0" size={20} />
+                    <p className="text-white/90">Initial investment starting from ₹15 lakhs only</p>
                   </div>
                   <div className="flex items-start">
-                    <CheckCircle className="text-primary-200 mr-3 mt-1 flex-shrink-0" size={20} />
+                    <CheckCircle className="text-[#FF7E3D] mr-3 mt-1 flex-shrink-0" size={20} />
+                    <p className="text-white/90">Expected ROI within 18-24 months</p>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="text-[#FF7E3D] mr-3 mt-1 flex-shrink-0" size={20} />
                     <p className="text-white/90">Access to our wide range of generic medicines</p>
                   </div>
                   <div className="flex items-start">
-                    <CheckCircle className="text-primary-200 mr-3 mt-1 flex-shrink-0" size={20} />
-                    <p className="text-white/90">Marketing and operational assistance</p>
+                    <CheckCircle className="text-[#FF7E3D] mr-3 mt-1 flex-shrink-0" size={20} />
+                    <p className="text-white/90">Comprehensive marketing and operational support</p>
                   </div>
                 </div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 animate-fade-in">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20"
+              >
                 <h3 className="text-2xl font-semibold mb-6">Enquiry Form</h3>
                 <form className="space-y-6">
                   <div>
@@ -227,6 +535,18 @@ const Partner = () => {
                     />
                   </div>
                   <div>
+                    <label htmlFor="location" className="block text-sm font-medium mb-2">
+                      Preferred Location *
+                    </label>
+                    <input
+                      type="text"
+                      id="location"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+                      placeholder="City, State"
+                      required
+                    />
+                  </div>
+                  <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
                       Message
                     </label>
@@ -237,17 +557,37 @@ const Partner = () => {
                       placeholder="Tell us about your location and any questions you may have"
                     ></textarea>
                   </div>
-                  <Button className="w-full bg-white text-primary hover:bg-white/90">
+                  <Button className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">
                     Submit Enquiry
                   </Button>
                 </form>
-              </div>
+              </motion.div>
             </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-white dark:bg-gray-900">
+          <div className="container mx-auto px-4 md:px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="heading-md text-gray-900 dark:text-white mb-4">Ready to Start Your Pharmacy Business?</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                Join the Yugrow Pharmacy network today and be part of our mission to provide affordable healthcare across India.
+              </p>
+              <Button size="lg" className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">
+                Apply Now
+              </Button>
+            </motion.div>
           </div>
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

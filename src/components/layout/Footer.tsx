@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="inline-block">
               <img 
-                src="/public/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
+                src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
                 alt="Yugrow Pharmacy Logo" 
                 className="h-14 mb-2"
               />
