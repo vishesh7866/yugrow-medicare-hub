@@ -52,8 +52,13 @@ const Header = () => {
           >
             <img 
               src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
-              alt="Yugrow Pharmacy Logo" 
+              alt="Yugrow Pharmacy Logo"
               className="h-10 md:h-12 transform hover:scale-105 transition-transform"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                console.error("Logo failed to load");
+                target.src = "https://placehold.co/200x80/042652/FF7E3D?text=Yugrow+Pharmacy";
+              }}
             />
           </Link>
 

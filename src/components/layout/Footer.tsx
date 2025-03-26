@@ -16,6 +16,11 @@ const Footer = () => {
                 src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
                 alt="Yugrow Pharmacy Logo" 
                 className="h-14 mb-2"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  console.error("Footer logo failed to load");
+                  target.src = "https://placehold.co/200x80/042652/FF7E3D?text=Yugrow+Pharmacy";
+                }}
               />
             </Link>
             <p className="text-white/80 max-w-xs">
@@ -107,7 +112,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-[#FF7E3D]">Partner Login</h3>
             <Link 
-              to="/login" 
+              to="/partner" 
               className="inline-block py-2 px-4 bg-white/10 border border-white/20 rounded-md text-white hover:bg-white/20 transition-colors"
             >
               Partner Dashboard
