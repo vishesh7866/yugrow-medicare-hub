@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Heart, Lungs, Brain, Pill, FlaskConical, Tablets, Baby, Eye } from 'lucide-react';
+import { Heart, Stethoscope, Brain, Pill, Flask, Tablets, Baby, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const ProductCategories = () => {
       color: "bg-red-100 dark:bg-red-900/20 text-red-500 dark:text-red-400"
     },
     {
-      icon: <FlaskConical className="h-10 w-10" />,
+      icon: <Flask className="h-10 w-10" />,
       name: "Diabetic Care",
       description: "Affordable options for diabetes management and blood sugar control",
       color: "bg-blue-100 dark:bg-blue-900/20 text-blue-500 dark:text-blue-400"
@@ -31,7 +31,7 @@ const ProductCategories = () => {
       color: "bg-green-100 dark:bg-green-900/20 text-green-500 dark:text-green-400"
     },
     {
-      icon: <Lungs className="h-10 w-10" />,
+      icon: <Stethoscope className="h-10 w-10" />,
       name: "Respiratory",
       description: "Medicines for asthma, COPD, and other respiratory conditions",
       color: "bg-teal-100 dark:bg-teal-900/20 text-teal-500 dark:text-teal-400"

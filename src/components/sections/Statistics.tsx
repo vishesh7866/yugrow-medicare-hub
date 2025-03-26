@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Users, Activity, BuildingStore, TrendingDown } from 'lucide-react';
+import { Users, Activity, Store, TrendingDown } from 'lucide-react';
 
 const Statistics = () => {
   const [animatedValues, setAnimatedValues] = useState({
@@ -53,7 +53,7 @@ const Statistics = () => {
 
   const stats = [
     {
-      icon: <BuildingStore className="h-10 w-10 text-white" />,
+      icon: <Store className="h-10 w-10 text-white" />,
       value: animatedValues.outlets,
       suffix: "+",
       label: "Outlets Across India",
