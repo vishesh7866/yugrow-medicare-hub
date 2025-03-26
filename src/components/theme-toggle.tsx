@@ -7,10 +7,10 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+    // Toggle between light and dark only, skip system
+    const newTheme = theme === "dark" ? "light" : "dark";
     console.log(`Current theme: ${theme}, Switching to: ${newTheme}`);
     setTheme(newTheme);
-    localStorage.setItem("vite-ui-theme", newTheme);
   };
 
   return (
