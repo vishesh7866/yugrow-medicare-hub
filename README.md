@@ -1,69 +1,51 @@
-# Welcome to your Lovable project
+# RVS
 
-## Project info
+DSDVDSVSDVVDS
 
-**URL**: https://lovable.dev/projects/bef4d5ab-3b2a-447c-bd65-d17e3dcb53b1
 
-## How can I edit this code?
+## Technologies
 
-There are several ways of editing your application.
+![REACT](https://img.shields.io/badge/-REACT-05122A?style=flat&logo=react) ![PYTHON](https://img.shields.io/badge/-PYTHON-05122A?style=flat&logo=python)
 
-**Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/bef4d5ab-3b2a-447c-bd65-d17e3dcb53b1) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Features
 
-**Use your preferred IDE**
+- 
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+npm install
 ```
 
-**Edit a file directly in GitHub**
+## Usage
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+npm start
+```
 
-**Use GitHub Codespaces**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
 
-This project is built with .
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
 
-## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/bef4d5ab-3b2a-447c-bd65-d17e3dcb53b1) and click on Share -> Publish.
 
-## I want to use a custom domain - is that possible?
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+
+
+
+
+
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
