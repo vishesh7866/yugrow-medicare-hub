@@ -16,14 +16,14 @@ const Testimonials = () => {
       quote: "As a franchise partner, the support from Yugrow has been exceptional. The FOFO model is truly profitable and well-structured.",
       name: "Priya Patel",
       title: "Franchise Owner",
-      location: "Ahmedabad"
+      location: "Pune"
     },
     {
       id: 3,
       quote: "The quality of generic medicines from Yugrow is on par with branded alternatives. I've been recommending them to all my patients.",
       name: "Dr. Vikram Singh",
       title: "General Physician",
-      location: "Delhi"
+      location: "Mumbai"
     }
   ];
 

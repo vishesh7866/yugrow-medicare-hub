@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <img 
-              src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png"
+              src="/lovable-uploads/YUGROW_LOGO_PNG-removebg.png"
               alt="Yugrow Pharmacy Logo"
               className="h-10 md:h-12 mb-4"
               onError={(e) => {

@@ -52,7 +52,7 @@ const Header = () => {
             className="flex items-center"
           >
             <img 
-              src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
+              src="/lovable-uploads/YUGROW_LOGO_PNG-removebg.png" 
               alt="Yugrow Pharmacy Logo"
               className="h-10 md:h-12 transform hover:scale-105 transition-transform"
               onError={(e) => {
@@ -78,9 +78,15 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Link to="/contact">
-              <Button className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">Enquire Now</Button>
-            </Link>
+           <Link to="/contact">
+  <Button 
+    className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white"
+    onClick={() => window.location.href = "http://brainyug.com/"}
+  >
+    Login Now
+  </Button>
+</Link>
+
             <ThemeToggle />
           </nav>
 
@@ -115,9 +121,10 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Link to="/contact" className="mt-4">
-              <Button className="bg-[#FF7E3D] w-full hover:bg-[#FF7E3D]/80 text-white">Enquire Now</Button>
-            </Link>
+            <a href="http://brainyug.com/" className="mt-4">
+            <Button className="bg-[#FF7E3D] w-full hover:bg-[#FF7E3D]/80 text-white">Login Now</Button>
+            </a>
+
           </nav>
         </div>
       )}

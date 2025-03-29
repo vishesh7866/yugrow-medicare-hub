@@ -105,13 +105,13 @@ const Partner = () => {
     },
     {
       name: "Priya Patel",
-      location: "Ahmedabad, Gujarat",
+      location: "Pune, Maharashtra",
       quote: "The low investment model and high-quality products have helped me establish a profitable pharmacy in just 6 months.",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
     },
     {
       name: "Suresh Kumar",
-      location: "Bangalore, Karnataka",
+      location: "Mumbai, Maharashtra",
       quote: "The inventory management system and marketing support from Yugrow have been key to my franchise's success.",
       avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
     }
@@ -177,9 +177,14 @@ const Partner = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Button size="lg" className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white flex items-center gap-2">
-                  Apply for Franchise <ArrowRight size={18} />
-                </Button>
+                <Button 
+  size="lg" 
+  className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white flex items-center gap-2"
+  onClick={() => window.location.href = '/contact'}
+>
+  Apply for Franchise <ArrowRight size={18} />
+</Button>
+
               </motion.div>
             </div>
           </div>
@@ -226,14 +231,13 @@ const Partner = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="bg-primary-50 dark:bg-gray-700 p-6 rounded-xl"
               >
-                <h3 className="text-3xl font-bold text-primary dark:text-primary-200 mb-2">25%+</h3>
+                <h3 className="text-3xl font-bold text-primary dark:text-primary-200 mb-2">30-70%</h3>
                 <p className="text-gray-700 dark:text-gray-300">Profit Margin</p>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Store Showcase Section */}
         <section className="section-padding bg-primary-50 dark:bg-gray-800">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-12">
@@ -244,7 +248,7 @@ const Partner = () => {
                 transition={{ duration: 0.5 }}
                 className="heading-lg text-gray-900 dark:text-white mb-4"
               >
-                Our Pharmacy Store Design
+                Our Pharmacy Store & Franchise Model
               </motion.h2>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -253,30 +257,9 @@ const Partner = () => {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-lg text-gray-600 dark:text-gray-300"
               >
-                Modern, professional and customer-friendly store layout to enhance the customer experience
+                Modern, professional, and customer-friendly store layout combined with a successful FOFO business model.
               </motion.p>
             </div>
-            <div className="flex justify-center">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative max-w-4xl rounded-xl overflow-hidden shadow-xl"
-              >
-                <img 
-                  src="/lovable-uploads/0efd825b-4918-433a-810b-413c44d46ab4.png" 
-                  alt="Yugrow Pharmacy Store Design" 
-                  className="w-full h-auto"
-                />
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* FOFO Model Section */}
-        <section className="section-padding bg-white dark:bg-gray-900">
-          <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
@@ -315,29 +298,13 @@ const Partner = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="relative"
+                className="relative max-w-4xl rounded-xl overflow-hidden shadow-xl"
               >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-300 to-primary-500 rounded-2xl blur opacity-30"></div>
-                <div className="relative h-full">
-                  <img 
-                    src="https://images.unsplash.com/photo-1563453392212-326f5e854473?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" 
-                    alt="Yugrow Pharmacy store" 
-                    className="w-full rounded-2xl shadow-lg"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                    <div className="flex items-center">
-                      <img 
-                        src="/lovable-uploads/ce07c564-627a-4570-a360-687d9ba52417.png" 
-                        alt="Yugrow Pharmacy Logo" 
-                        className="h-12 mr-4"
-                      />
-                      <div>
-                        <p className="text-white font-semibold">Yugrow Pharmacy</p>
-                        <p className="text-white/70 text-sm">Mumbai Central Branch</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <img 
+                  src="/lovable-uploads/0efd825b-4918-433a-810b-413c44d46ab4.png" 
+                  alt="Yugrow Pharmacy Store Design" 
+                  className="w-full h-auto rounded-2xl"
+                />
               </motion.div>
             </div>
           </div>
@@ -563,11 +530,11 @@ const Partner = () => {
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <CheckCircle className="text-[#FF7E3D] mr-3 mt-1 flex-shrink-0" size={20} />
-                    <p className="text-white/90">Initial investment starting from ₹15 lakhs only</p>
+                    <p className="text-white/90">Initial investment starting from ₹1.5-2 lakhs only</p>
                   </div>
                   <div className="flex items-start">
                     <CheckCircle className="text-[#FF7E3D] mr-3 mt-1 flex-shrink-0" size={20} />
-                    <p className="text-white/90">Expected ROI within 18-24 months</p>
+                    <p className="text-white/90">Expected ROI within 6-12 months</p>
                   </div>
                   <div className="flex items-start">
                     <CheckCircle className="text-[#FF7E3D] mr-3 mt-1 flex-shrink-0" size={20} />
