@@ -579,9 +579,15 @@ const Partner = () => {
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                 Join the Yugrow Pharmacy network today and be part of our mission to provide affordable healthcare across India.
               </p>
-              <Button size="lg" className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">
-                Apply Now
-              </Button>
+              <a 
+                href="https://brainyug.com/auth/login/" 
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button size="lg" className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">
+                  Apply Now
+                </Button>
+              </a>
             </motion.div>
           </div>
         </section>

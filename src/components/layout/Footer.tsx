@@ -96,8 +96,8 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <Mail size={18} className="text-[#FF7E3D] mr-2 mt-1 flex-shrink-0" />
-                <a href="mailto:admin@yugrowpharmacy.com" className="text-white/80 hover:text-[#FF7E3D] transition-colors">
-                  admin@yugrowpharmacy.com
+                <a href="mailto:prm@yugrowpharmacy.com" className="text-white/80 hover:text-[#FF7E3D] transition-colors">
+                  prm@yugrowpharmacy.com
                 </a>
               </li>
               <li className="flex items-start">
@@ -111,12 +111,14 @@ const Footer = () => {
 
           <div>
             <h3 className="text-lg font-semibold mb-4 text-[#FF7E3D]">Partner Login</h3>
-            <Link 
-              to="/partner" 
+            <a 
+              href="https://brainyug.com/auth/login/" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block py-2 px-4 bg-white/10 border border-white/20 rounded-md text-white hover:bg-white/20 transition-colors"
             >
               Partner Dashboard
-            </Link>
+            </a>
           </div>
         </div>
 

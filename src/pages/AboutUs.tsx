@@ -146,8 +146,8 @@ const AboutUs = () => {
             <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg">
               <div className="h-80 overflow-hidden">
                 <img 
-                  src="/lovable-uploads/director1.jpg" 
-                  alt="Director" 
+                  src="/lovable-uploads/952cd23d-98d0-47d1-8671-467817c3da76.png" 
+                  alt="Directors of Yugrow Pharmacy" 
                   className="w-full h-full object-cover object-center transition-transform hover:scale-105"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -156,10 +156,10 @@ const AboutUs = () => {
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-[#042652] dark:text-white">Director Name</h3>
-                <p className="text-[#FF7E3D] mb-4">Founder & CEO</p>
+                <h3 className="text-xl font-bold text-[#042652] dark:text-white">Management Team</h3>
+                <p className="text-[#FF7E3D] mb-4">Founders & Directors</p>
                 <p className="text-gray-600 dark:text-gray-300">
-                  A visionary leader with extensive experience in the pharmaceutical industry, committed to making quality healthcare accessible to all.
+                  Our visionary leaders with extensive experience in the pharmaceutical industry, committed to making quality healthcare accessible to all.
                 </p>
               </div>
             </div>
@@ -167,8 +167,8 @@ const AboutUs = () => {
             <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg">
               <div className="h-80 overflow-hidden">
                 <img 
-                  src="/lovable-uploads/director2.jpg" 
-                  alt="Director" 
+                  src="/lovable-uploads/952cd23d-98d0-47d1-8671-467817c3da76.png" 
+                  alt="Directors of Yugrow Pharmacy" 
                   className="w-full h-full object-cover object-center transition-transform hover:scale-105"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -177,8 +177,8 @@ const AboutUs = () => {
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-[#042652] dark:text-white">Director Name</h3>
-                <p className="text-[#FF7E3D] mb-4">Managing Director</p>
+                <h3 className="text-xl font-bold text-[#042652] dark:text-white">Executive Team</h3>
+                <p className="text-[#FF7E3D] mb-4">Chief Operations</p>
                 <p className="text-gray-600 dark:text-gray-300">
                   Bringing strategic insights and operational excellence to Yugrow Pharmacy, dedicated to sustainable growth and innovation.
                 </p>
