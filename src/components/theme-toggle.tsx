@@ -9,7 +9,7 @@ export function ThemeToggle() {
   const toggleTheme = () => {
     // Toggle between light and dark only, skip system
     const newTheme = theme === "dark" ? "light" : "dark";
-    console.log(`Current theme: ${theme}, Switching to: ${newTheme}`);
+    console.log(`Toggling theme from ${theme} to ${newTheme}`);
     setTheme(newTheme);
   };
 
