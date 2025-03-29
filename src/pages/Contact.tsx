@@ -1,10 +1,8 @@
-
 import React, { useEffect } from 'react';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import { ThemeToggle } from '@/components/theme-toggle';
 
 const Contact = () => {
   useEffect(() => {
@@ -15,11 +13,6 @@ const Contact = () => {
     <>
       <Header />
       <main className="transition-colors duration-300">
-        {/* Theme toggle */}
-        <div className="fixed top-4 right-4 z-50">
-          <ThemeToggle />
-        </div>
-        
         {/* Hero Section */}
         <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-white to-primary-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
           <div className="container mx-auto px-4 md:px-6">
@@ -58,8 +51,8 @@ const Contact = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Email</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">Send us your inquiries</p>
-                <a href="mailto:admin@yugrowpharmacy.com" className="text-lg font-medium text-primary dark:text-[#FF7E3D] hover:underline">
-                  admin@yugrowpharmacy.com
+                <a href="mailto:prm@yugrowpharmacy.com" className="text-lg font-medium text-primary dark:text-[#FF7E3D] hover:underline">
+                  prm@yugrowpharmacy.com
                 </a>
               </div>
               
@@ -108,7 +101,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                        <p className="font-medium dark:text-white">admin@yugrowpharmacy.com</p>
+                        <p className="font-medium dark:text-white">prm@yugrowpharmacy.com</p>
                       </div>
                     </div>
                     

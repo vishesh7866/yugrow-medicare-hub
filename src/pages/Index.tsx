@@ -15,13 +15,11 @@ import Footer from '../components/layout/Footer';
 import { useTheme } from '@/components/theme-provider';
 
 const Index = () => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   
   useEffect(() => {
-    // Set theme to dark on initial load if not already set
-    if (theme !== 'dark') {
-      setTheme('dark');
-    }
+    // Set theme to dark on initial load
+    setTheme('dark');
     
     // Add a dynamic background animation
     const handleMouseMove = (e: MouseEvent) => {
@@ -37,7 +35,7 @@ const Index = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [theme, setTheme]);
+  }, [setTheme]);
 
   return (
     <div className="relative bg-gradient-to-br from-white to-primary-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
