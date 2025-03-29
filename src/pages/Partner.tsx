@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -585,4 +586,62 @@ const Partner = () => {
                 transition={{ duration: 0.6 }}
                 className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20"
               >
-                <h3 className="text-2
+                <h3 className="text-2xl font-semibold mb-6">Enquire Now</h3>
+                <form className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-white/80">Full Name*</label>
+                      <input 
+                        type="text" 
+                        placeholder="Your name" 
+                        className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-white/80">Phone Number*</label>
+                      <input 
+                        type="tel" 
+                        placeholder="Your phone" 
+                        className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-white/80">Email Address*</label>
+                    <input 
+                      type="email" 
+                      placeholder="Your email" 
+                      className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-white/80">City/Location*</label>
+                    <input 
+                      type="text" 
+                      placeholder="Your preferred location" 
+                      className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-white/80">Message (Optional)</label>
+                    <textarea 
+                      rows={3} 
+                      placeholder="Any specific requirements or questions" 
+                      className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                    ></textarea>
+                  </div>
+                  <Button className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">
+                    Submit Enquiry
+                  </Button>
+                </form>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Partner;
