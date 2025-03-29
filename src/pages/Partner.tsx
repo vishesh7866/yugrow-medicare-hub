@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -117,6 +116,14 @@ const Partner = () => {
     }
   ];
 
+  const certifications = [
+    {
+      name: "ISO Certified",
+      image: "/lovable-uploads/6c44e735-aeee-42f4-8b84-5dfc06749806.png",
+      description: "ISO 9001:2015 certification for quality management systems"
+    }
+  ];
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -225,6 +232,47 @@ const Partner = () => {
           </div>
         </section>
 
+        {/* Store Showcase Section */}
+        <section className="section-padding bg-primary-50 dark:bg-gray-800">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="heading-lg text-gray-900 dark:text-white mb-4"
+              >
+                Our Pharmacy Store Design
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg text-gray-600 dark:text-gray-300"
+              >
+                Modern, professional and customer-friendly store layout to enhance the customer experience
+              </motion.p>
+            </div>
+            <div className="flex justify-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="relative max-w-4xl rounded-xl overflow-hidden shadow-xl"
+              >
+                <img 
+                  src="/lovable-uploads/0efd825b-4918-433a-810b-413c44d46ab4.png" 
+                  alt="Yugrow Pharmacy Store Design" 
+                  className="w-full h-auto"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* FOFO Model Section */}
         <section className="section-padding bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4 md:px-6">
@@ -289,6 +337,47 @@ const Partner = () => {
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Certifications Section */}
+        <section className="section-padding bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="heading-lg text-gray-900 dark:text-white mb-4"
+              >
+                Quality Certifications
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg text-gray-600 dark:text-gray-300"
+              >
+                Our operations and products meet the highest industry standards
+              </motion.p>
+            </div>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
+              >
+                <img 
+                  src="/lovable-uploads/6c44e735-aeee-42f4-8b84-5dfc06749806.png" 
+                  alt="Certification Badges" 
+                  className="h-auto max-w-full"
+                />
               </motion.div>
             </div>
           </div>
@@ -496,105 +585,4 @@ const Partner = () => {
                 transition={{ duration: 0.6 }}
                 className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20"
               >
-                <h3 className="text-2xl font-semibold mb-6">Enquiry Form</h3>
-                <form className="space-y-6">
-                  <div>
-                    <label htmlFor="fullName" className="block text-sm font-medium mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
-                      placeholder="Your full name"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="mobile" className="block text-sm font-medium mb-2">
-                      Mobile Number *
-                    </label>
-                    <input
-                      type="tel"
-                      id="mobile"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
-                      placeholder="+91 xxxxx xxxxx"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
-                      placeholder="you@example.com"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="location" className="block text-sm font-medium mb-2">
-                      Preferred Location *
-                    </label>
-                    <input
-                      type="text"
-                      id="location"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
-                      placeholder="City, State"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={4}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
-                      placeholder="Tell us about your location and any questions you may have"
-                    ></textarea>
-                  </div>
-                  <Button className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">
-                    Submit Enquiry
-                  </Button>
-                </form>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-16 bg-white dark:bg-gray-900">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="heading-md text-gray-900 dark:text-white mb-4">Ready to Start Your Pharmacy Business?</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join the Yugrow Pharmacy network today and be part of our mission to provide affordable healthcare across India.
-              </p>
-              <a 
-                href="https://brainyug.com/auth/login/" 
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="lg" className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white">
-                  Apply Now
-                </Button>
-              </a>
-            </motion.div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default Partner;
+                <h3 className="text-2
