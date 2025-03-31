@@ -5,13 +5,11 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from '@/lib/utils';
 
 const Header = () => {
@@ -83,10 +81,10 @@ const Header = () => {
           <nav className="hidden md:flex md:items-center md:space-x-6">
             {navItems.map((item) => (
               item.dropdown ? (
-                <NavigationMenu key={item.name}>
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className={`bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-sm font-medium transition-colors hover:text-[#FF7E3D] ${
+                <div key={item.name} className="relative">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="flex items-center space-x-1 bg-transparent focus:outline-none focus:ring-0">
+                      <span className={`text-sm font-medium transition-colors hover:text-[#FF7E3D] ${
                         location.pathname === item.path || 
                         location.pathname === '/careers' || 
                         location.pathname === '/csr' || 
@@ -95,29 +93,28 @@ const Header = () => {
                           : 'text-white'
                       }`}>
                         {item.name}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid w-[200px] gap-1 p-2 bg-white dark:bg-gray-800 rounded-md shadow-lg">
-                          {partnerDropdownItems.map((dropdownItem) => (
-                            <li key={dropdownItem.path}>
-                              <Link
-                                to={dropdownItem.path}
-                                className={cn(
-                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                                  location.pathname === dropdownItem.path 
-                                    ? "bg-accent text-accent-foreground" 
-                                    : "text-gray-700 dark:text-gray-200"
-                                )}
-                              >
-                                <div className="text-sm font-medium leading-none">{dropdownItem.name}</div>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
+                      </span>
+                      <ChevronDown className="h-4 w-4 text-white" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56 bg-white dark:bg-gray-800 p-2 rounded-md shadow-lg">
+                      {partnerDropdownItems.map((dropdownItem) => (
+                        <DropdownMenuItem key={dropdownItem.path} asChild>
+                          <Link
+                            to={dropdownItem.path}
+                            className={cn(
+                              "w-full px-2 py-2 text-sm rounded-md transition-colors",
+                              location.pathname === dropdownItem.path 
+                                ? "bg-accent text-accent-foreground" 
+                                : "text-gray-700 dark:text-gray-200 hover:bg-accent hover:text-accent-foreground"
+                            )}
+                          >
+                            {dropdownItem.name}
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               ) : (
                 <Link
                   key={item.name}
@@ -133,14 +130,13 @@ const Header = () => {
               )
             ))}
             
-            <Link to="/contact">
+            <a href="http://brainyug.com/">
               <Button 
                 className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white"
-                onClick={() => window.location.href = "http://brainyug.com/"}
               >
                 Login Now
               </Button>
-            </Link>
+            </a>
 
             <ThemeToggle />
           </nav>
