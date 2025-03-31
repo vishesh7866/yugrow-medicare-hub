@@ -1,10 +1,61 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Helmet } from 'react-helmet';
 
 const Careers = () => {
+  const [activeJob, setActiveJob] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    position: '',
+    resume: null,
+    coverLetter: '',
+  });
+  const [statusMessage, setStatusMessage] = useState(null);
+
+  const jobOpenings = [
+    { id: 1, title: 'Pharmacy Manager', location: 'Mumbai, Maharashtra', desc: 'Oversee daily operations and ensure compliance.' },
+    { id: 2, title: 'Marketing Specialist', location: 'Pune, Maharashtra', desc: 'Develop marketing strategies for brand awareness.' },
+    { id: 3, title: 'Supply Chain Coordinator', location: 'Delhi NCR', desc: 'Optimize supply chain operations and distribution.' },
+  ];
+
+  const handleApplyClick = (jobId, jobTitle) => {
+    setActiveJob(activeJob === jobId ? null : jobId);
+    setFormData({ ...formData, position: jobTitle });
+    setStatusMessage(null);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, resume: e.target.files[0] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+    Object.keys(formData).forEach((key) => {
+      formDataToSend.append(key, formData[key]);
+    });
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/apply', formDataToSend, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setStatusMessage({ success: true, text: response.data.message || 'Application submitted successfully!' });
+      setFormData({ name: '', email: '', phone: '', position: '', resume: null, coverLetter: '' });
+      setActiveJob(null);
+    } catch (error) {
+      setStatusMessage({ success: false, text: 'Failed to submit application. Please try again later.' });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -13,123 +64,47 @@ const Careers = () => {
       </Helmet>
       <Header />
       <main className="pt-20 min-h-screen">
-        <section className="py-16 md:py-24 bg-gradient-to-b from-[#042652] to-[#021633] text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Join Our Team</h1>
-              <p className="text-lg text-gray-300">
-                Be part of our mission to make quality healthcare accessible to everyone
-              </p>
-            </div>
+        <section className="py-16 min-h-[40vh] bg-gradient-to-b from-[#042652] to-[#021633] text-white text-center flex items-center">
+          <div className="container mx-auto px-4">
+            <h1 className="text-4xl font-bold mb-4">Join Our Team</h1>
+            <p className="text-lg text-gray-300">Be part of our mission to make quality healthcare accessible to everyone.</p>
           </div>
         </section>
+        
+        <section className="py-16 bg-[#F5F7FA] dark:bg-gray-800">
+          <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+            <h2 className="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-white">Current Openings</h2>
+            <div className="space-y-6">
+              {jobOpenings.map((job) => (
+                <div key={job.id} className="border-b border-gray-200 dark:border-gray-700 pb-6">
+                  <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-2">{job.title}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{job.location} | Full-Time</p>
+                  <p className="text-gray-700 dark:text-gray-300 mb-4">{job.desc}</p>
+                  <button
+                    onClick={() => handleApplyClick(job.id, job.title)}
+                    className="bg-[#FF7E3D] text-white py-2 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition"
+                  >
+                    {activeJob === job.id ? 'Cancel' : 'Apply Now'}
+                  </button>
 
-        <section className="py-16 bg-white dark:bg-gray-900">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-                Why Work With Us?
-              </h2>
-              
-              <div className="grid md:grid-cols-2 gap-8 mb-16">
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700">
-                  <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-4">
-                    Meaningful Impact
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    Every day, your work will directly contribute to making healthcare more accessible to people across India. Be part of a company that puts purpose before profit.
-                  </p>
+                  {activeJob === job.id && (
+                    <form onSubmit={handleSubmit} className="mt-6 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Apply for {job.title}</h3>
+                      {statusMessage && (
+                        <p className={`mb-4 ${statusMessage.success ? 'text-green-500' : 'text-red-500'}`}>{statusMessage.text}</p>
+                      )}
+                      <div className="grid grid-cols-1 gap-4">
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
+                        <input type="file" name="resume" onChange={handleFileChange} required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
+                        <textarea name="coverLetter" value={formData.coverLetter} onChange={handleChange} placeholder="Cover Letter (Optional)" rows="4" className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
+                        <button type="submit" className="bg-[#FF7E3D] text-white py-3 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition">Submit Application</button>
+                      </div>
+                    </form>
+                  )}
                 </div>
-                
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700">
-                  <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-4">
-                    Growth & Development
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    We invest in our team's professional growth with continuous learning opportunities, mentoring programs, and clear career advancement paths.
-                  </p>
-                </div>
-                
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700">
-                  <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-4">
-                    Inclusive Culture
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    Join a diverse and supportive team where your voice matters. We celebrate different perspectives and create an environment where everyone can thrive.
-                  </p>
-                </div>
-                
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700">
-                  <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-4">
-                    Comprehensive Benefits
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    We offer competitive compensation, health benefits, work-life balance initiatives, and other perks to support your overall wellbeing.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="bg-[#F5F7FA] dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 mb-16">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-                  Current Openings
-                </h2>
-                
-                <div className="space-y-6">
-                  <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
-                    <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-2">
-                      Pharmacy Manager
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                      Mumbai, Maharashtra | Full-Time
-                    </p>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">
-                      We're looking for an experienced Pharmacy Manager to oversee daily operations, maintain inventory, and ensure regulatory compliance while providing exceptional customer service.
-                    </p>
-                    <button className="bg-[#FF7E3D] text-white py-2 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition-colors">
-                      Apply Now
-                    </button>
-                  </div>
-                  
-                  <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
-                    <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-2">
-                      Marketing Specialist
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                      Pune, Maharashtra | Full-Time
-                    </p>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">
-                      Join our marketing team to develop and implement strategies that raise awareness about generic medicines and grow our franchise network across India.
-                    </p>
-                    <button className="bg-[#FF7E3D] text-white py-2 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition-colors">
-                      Apply Now
-                    </button>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-[#042652] dark:text-[#FF7E3D] mb-2">
-                      Supply Chain Coordinator
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                      Delhi NCR | Full-Time
-                    </p>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">
-                      We're seeking a detail-oriented Supply Chain Coordinator to optimize our distribution network, manage relationships with suppliers, and ensure timely delivery to all franchise locations.
-                    </p>
-                    <button className="bg-[#FF7E3D] text-white py-2 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition-colors">
-                      Apply Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                  Don't see a suitable position?
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  We're always looking for talented individuals to join our team. Send your resume to <span className="text-[#FF7E3D]">careers@yugrowpharmacy.com</span>
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </section>

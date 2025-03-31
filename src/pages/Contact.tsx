@@ -1,13 +1,51 @@
-import React, { useEffect } from 'react';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Header from '../components/layout/Header';
-import Footer from '../components/layout/Footer';
+import React, { useState } from "react";
+import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
-const Contact = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setResponseMessage(null);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setResponseMessage({ type: "success", text: "Message sent successfully!" });
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        throw new Error(result.message || "Something went wrong.");
+      }
+    } catch (error) {
+      setResponseMessage({ type: "error", text: error.message });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -119,7 +157,7 @@ const Contact = () => {
                 
                 <div className="lg:col-span-3 animate-fade-in">
                   <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 transition-colors duration-300">
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -128,6 +166,8 @@ const Contact = () => {
                           <input
                             type="text"
                             id="firstName"
+                            value={formData.firstName}
+                            onChange={handleChange}
                             className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-[#FF7E3D]/50 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-300"
                             placeholder="John"
                             required
@@ -140,6 +180,8 @@ const Contact = () => {
                           <input
                             type="text"
                             id="lastName"
+                            value={formData.lastName}
+                            onChange={handleChange}
                             className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-[#FF7E3D]/50 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-300"
                             placeholder="Doe"
                             required
@@ -155,6 +197,8 @@ const Contact = () => {
                           <input
                             type="email"
                             id="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-[#FF7E3D]/50 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-300"
                             placeholder="you@example.com"
                             required
@@ -167,6 +211,8 @@ const Contact = () => {
                           <input
                             type="tel"
                             id="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
                             className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-[#FF7E3D]/50 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-300"
                             placeholder="+91 xxxxx xxxxx"
                             required
@@ -181,6 +227,8 @@ const Contact = () => {
                         <input
                           type="text"
                           id="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
                           className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-[#FF7E3D]/50 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-300"
                           placeholder="How can we help you?"
                         />
@@ -193,15 +241,22 @@ const Contact = () => {
                         <textarea
                           id="message"
                           rows={5}
+                          value={formData.message}
+                          onChange={handleChange}
                           className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-[#FF7E3D]/50 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-300"
                           placeholder="Your message..."
                           required
                         ></textarea>
                       </div>
                       
-                      <Button className="flex items-center gap-2 bg-primary hover:bg-primary-600 dark:bg-[#FF7E3D] dark:hover:bg-[#FF570A] transition-colors duration-300">
-                        Send Message <Send size={18} />
+                      <Button type="submit" className="flex items-center gap-2 bg-primary hover:bg-primary-600 dark:bg-[#FF7E3D] dark:hover:bg-[#FF570A] transition-colors duration-300">
+                        {loading ? "Sending..." : "Send Message"} <Send size={18} />
                       </Button>
+                      {responseMessage && (
+                        <p className={`text-${responseMessage.type === "success" ? "green" : "red"}-600`}>
+                          {responseMessage.text}
+                        </p>
+                      )}
                     </form>
                   </div>
                 </div>
@@ -229,4 +284,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactForm;

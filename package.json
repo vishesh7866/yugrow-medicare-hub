@@ -40,15 +40,21 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@tanstack/react-query": "^5.56.2",
+    "axios": "^1.8.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "cors": "^2.8.5",
     "date-fns": "^3.6.0",
+    "dotenv": "^16.4.7",
     "embla-carousel-react": "^8.3.0",
+    "express": "^4.21.2",
     "framer-motion": "^12.6.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
+    "multer": "^1.4.5-lts.2",
     "next-themes": "^0.3.0",
+    "pg": "^8.14.1",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
@@ -82,5 +88,18 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  }
+  },
+  "description": "**URL**: https://lovable.dev/projects/bef4d5ab-3b2a-447c-bd65-d17e3dcb53b1",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishesh7866/yugrow-medicare-hub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishesh7866/yugrow-medicare-hub/issues"
+  },
+  "homepage": "https://github.com/vishesh7866/yugrow-medicare-hub#readme"
 }
