@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '@/components/layout/Header';
@@ -5,16 +6,16 @@ import Footer from '@/components/layout/Footer';
 import { Helmet } from 'react-helmet';
 
 const Careers = () => {
-  const [activeJob, setActiveJob] = useState(null);
+  const [activeJob, setActiveJob] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     position: '',
-    resume: null,
+    resume: null as File | null,
     coverLetter: '',
   });
-  const [statusMessage, setStatusMessage] = useState(null);
+  const [statusMessage, setStatusMessage] = useState<{ success: boolean; text: string } | null>(null);
 
   const jobOpenings = [
     { id: 1, title: 'Pharmacy Manager', location: 'Mumbai, Maharashtra', desc: 'Oversee daily operations and ensure compliance.' },
@@ -22,26 +23,32 @@ const Careers = () => {
     { id: 3, title: 'Supply Chain Coordinator', location: 'Delhi NCR', desc: 'Optimize supply chain operations and distribution.' },
   ];
 
-  const handleApplyClick = (jobId, jobTitle) => {
+  const handleApplyClick = (jobId: number, jobTitle: string) => {
     setActiveJob(activeJob === jobId ? null : jobId);
     setFormData({ ...formData, position: jobTitle });
     setStatusMessage(null);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, resume: e.target.files[0] });
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData({ ...formData, resume: e.target.files[0] });
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
-      formDataToSend.append(key, formData[key]);
+      // Type assertion to handle all possible formData property types
+      const value = formData[key as keyof typeof formData];
+      if (value !== null) {
+        formDataToSend.append(key, value as string | Blob);
+      }
     });
 
     try {
@@ -98,7 +105,7 @@ const Careers = () => {
                         <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
                         <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
                         <input type="file" name="resume" onChange={handleFileChange} required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
-                        <textarea name="coverLetter" value={formData.coverLetter} onChange={handleChange} placeholder="Cover Letter (Optional)" rows="4" className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
+                        <textarea name="coverLetter" value={formData.coverLetter} onChange={handleChange} placeholder="Cover Letter (Optional)" rows={4} className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
                         <button type="submit" className="bg-[#FF7E3D] text-white py-3 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition">Submit Application</button>
                       </div>
                     </form>
