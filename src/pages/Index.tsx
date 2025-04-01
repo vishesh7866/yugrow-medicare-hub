@@ -2,13 +2,9 @@
 import React, { useEffect } from 'react';
 import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
-import WhyChooseUs from '../components/sections/WhyChooseUs';
-import OurApproach from '../components/sections/OurApproach';
-import VisionMission from '../components/sections/VisionMission';
 import Statistics from '../components/sections/Statistics';
 import ProductCategories from '../components/sections/ProductCategories';
 import Testimonials from '../components/sections/Testimonials';
-import FAQ from '../components/sections/FAQ';
 import CallToAction from '../components/sections/CallToAction';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -51,11 +47,7 @@ const Index = () => {
         <About />
         <Statistics />
         <ProductCategories />
-        <WhyChooseUs />
-        <OurApproach />
         <Testimonials />
-        <VisionMission />
-        <FAQ />
         <CallToAction />
       </main>
       <Footer />

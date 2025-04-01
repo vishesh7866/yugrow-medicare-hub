@@ -2,6 +2,10 @@
 import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import WhyChooseUs from '../components/sections/WhyChooseUs';
+import OurApproach from '../components/sections/OurApproach';
+import VisionMission from '../components/sections/VisionMission';
+import FAQ from '../components/sections/FAQ';
 import { Badge } from "@/components/ui/badge";
 import { 
   Building2, 
@@ -11,10 +15,16 @@ import {
   Shield, 
   Clock 
 } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const AboutUs = () => {
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
+      <Helmet>
+        <title>About Us | Yugrow Pharmacy</title>
+        <meta name="description" content="Learn about Yugrow Pharmacy, our mission, vision, approach and why we are a trusted partner in healthcare." />
+      </Helmet>
+      
       <Header />
       
       {/* Hero Section */}
@@ -86,6 +96,18 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+      
+      {/* Why Choose Us Section (Moved from Index) */}
+      <WhyChooseUs />
+      
+      {/* Our Approach Section (Moved from Index) */}
+      <OurApproach />
+      
+      {/* Vision Mission Section (Moved from Index) */}
+      <VisionMission />
+      
+      {/* FAQ Section (Moved from Index) */}
+      <FAQ />
       
       {/* Who We Are Section */}
       <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
