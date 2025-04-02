@@ -11,10 +11,10 @@ const Statistics = () => {
   });
 
   const finalValues = {
-    outlets: 300,
+    outlets: 1500,
     customers: 500000,
-    savings: 70,
-    medicines: 1200
+    savings: 30-70,
+    medicines: 3000+,
   };
 
   useEffect(() => {

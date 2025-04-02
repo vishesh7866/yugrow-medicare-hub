@@ -170,7 +170,7 @@ const Partner = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-xl text-white/80 mb-8"
               >
-                Join our successful network of 300+ pharmacy outlets across India and be part of our mission to make healthcare affordable.
+                Join our successful network of 1500+ pharmacy outlets across India and be part of our mission to make healthcare affordable.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
