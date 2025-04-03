@@ -9,7 +9,102 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      contact_inquiries: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          message: string
+          phone: string
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          message: string
+          phone: string
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          message?: string
+          phone?: string
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      franchise_inquiries: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          location: string
+          message: string | null
+          phone: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          location: string
+          message?: string | null
+          phone: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          location?: string
+          message?: string | null
+          phone?: string
+        }
+        Relationships: []
+      }
+      job_applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+          position: string
+          resume_url: string | null
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone: string
+          position: string
+          resume_url?: string | null
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          position?: string
+          resume_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

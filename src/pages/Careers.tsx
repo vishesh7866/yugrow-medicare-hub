@@ -1,11 +1,13 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
+import { Helmet } from 'react-helmet';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Helmet } from 'react-helmet';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Careers = () => {
+  const { toast } = useToast();
   const [activeJob, setActiveJob] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -15,7 +17,7 @@ const Careers = () => {
     resume: null as File | null,
     coverLetter: '',
   });
-  const [statusMessage, setStatusMessage] = useState<{ success: boolean; text: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const jobOpenings = [
     { id: 1, title: 'Pharmacy Manager', location: 'Mumbai, Maharashtra', desc: 'Oversee daily operations and ensure compliance.' },
@@ -26,7 +28,6 @@ const Careers = () => {
   const handleApplyClick = (jobId: number, jobTitle: string) => {
     setActiveJob(activeJob === jobId ? null : jobId);
     setFormData({ ...formData, position: jobTitle });
-    setStatusMessage(null);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -42,24 +43,69 @@ const Careers = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-    Object.keys(formData).forEach((key) => {
-      // Type assertion to handle all possible formData property types
-      const value = formData[key as keyof typeof formData];
-      if (value !== null) {
-        formDataToSend.append(key, value as string | Blob);
-      }
-    });
-
+    setIsSubmitting(true);
+    
     try {
-      const response = await axios.post('http://localhost:5000/api/apply', formDataToSend, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      let resumeUrl = null;
+      
+      // 1. If there's a resume file, upload it to Storage first
+      if (formData.resume) {
+        const fileExt = formData.resume.name.split('.').pop();
+        const fileName = `${Date.now()}.${fileExt}`;
+        
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('resumes')
+          .upload(fileName, formData.resume);
+          
+        if (uploadError) throw uploadError;
+        
+        // Get the public URL
+        const { data: publicUrlData } = supabase.storage
+          .from('resumes')
+          .getPublicUrl(fileName);
+          
+        resumeUrl = publicUrlData.publicUrl;
+      }
+      
+      // 2. Store the application data
+      const { data, error } = await supabase
+        .from('job_applications')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          position: formData.position,
+          resume_url: resumeUrl,
+          cover_letter: formData.coverLetter
+        });
+        
+      if (error) throw error;
+      
+      toast({
+        title: "Application Submitted!",
+        description: "Thank you for applying. We'll review your application and get back to you.",
       });
-      setStatusMessage({ success: true, text: response.data.message || 'Application submitted successfully!' });
-      setFormData({ name: '', email: '', phone: '', position: '', resume: null, coverLetter: '' });
+      
+      // Reset form and close it
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        position: '',
+        resume: null,
+        coverLetter: ''
+      });
       setActiveJob(null);
+      
     } catch (error) {
-      setStatusMessage({ success: false, text: 'Failed to submit application. Please try again later.' });
+      toast({
+        variant: "destructive",
+        title: "Submission Failed",
+        description: error.message || "Something went wrong. Please try again.",
+      });
+      console.error("Error submitting job application:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -97,16 +143,56 @@ const Careers = () => {
                   {activeJob === job.id && (
                     <form onSubmit={handleSubmit} className="mt-6 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
                       <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Apply for {job.title}</h3>
-                      {statusMessage && (
-                        <p className={`mb-4 ${statusMessage.success ? 'text-green-500' : 'text-red-500'}`}>{statusMessage.text}</p>
-                      )}
                       <div className="grid grid-cols-1 gap-4">
-                        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
-                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
-                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
-                        <input type="file" name="resume" onChange={handleFileChange} required className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
-                        <textarea name="coverLetter" value={formData.coverLetter} onChange={handleChange} placeholder="Cover Letter (Optional)" rows={4} className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" />
-                        <button type="submit" className="bg-[#FF7E3D] text-white py-3 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition">Submit Application</button>
+                        <input 
+                          type="text" 
+                          name="name" 
+                          value={formData.name} 
+                          onChange={handleChange} 
+                          placeholder="Full Name" 
+                          required 
+                          className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" 
+                        />
+                        <input 
+                          type="email" 
+                          name="email" 
+                          value={formData.email} 
+                          onChange={handleChange} 
+                          placeholder="Email Address" 
+                          required 
+                          className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" 
+                        />
+                        <input 
+                          type="tel" 
+                          name="phone" 
+                          value={formData.phone} 
+                          onChange={handleChange} 
+                          placeholder="Phone Number" 
+                          required 
+                          className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" 
+                        />
+                        <input 
+                          type="file" 
+                          name="resume" 
+                          onChange={handleFileChange} 
+                          required 
+                          className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" 
+                        />
+                        <textarea 
+                          name="coverLetter" 
+                          value={formData.coverLetter} 
+                          onChange={handleChange} 
+                          placeholder="Cover Letter (Optional)" 
+                          rows={4} 
+                          className="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" 
+                        />
+                        <button 
+                          type="submit" 
+                          disabled={isSubmitting}
+                          className="bg-[#FF7E3D] text-white py-3 px-6 rounded-md hover:bg-[#FF7E3D]/80 transition"
+                        >
+                          {isSubmitting ? "Submitting..." : "Submit Application"}
+                        </button>
                       </div>
                     </form>
                   )}

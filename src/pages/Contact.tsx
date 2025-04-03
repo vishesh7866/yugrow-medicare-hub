@@ -1,10 +1,14 @@
+
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const ContactForm = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -15,7 +19,6 @@ const ContactForm = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -24,24 +27,44 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setResponseMessage(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // Submit to Supabase
+      const { data, error } = await supabase
+        .from('contact_inquiries')
+        .insert({
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message
+        });
 
-      const result = await response.json();
-      if (result.success) {
-        setResponseMessage({ type: "success", text: "Message sent successfully!" });
-        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
-      } else {
-        throw new Error(result.message || "Something went wrong.");
-      }
+      if (error) throw error;
+      
+      toast({
+        title: "Message Sent!",
+        description: "Thanks for reaching out. We'll get back to you soon.",
+      });
+      
+      // Reset the form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: ""
+      });
+      
     } catch (error) {
-      setResponseMessage({ type: "error", text: error.message });
+      toast({
+        variant: "destructive",
+        title: "Submission Failed",
+        description: error.message || "Something went wrong. Please try again.",
+      });
+      console.error("Error submitting contact form:", error);
     } finally {
       setLoading(false);
     }
@@ -249,14 +272,13 @@ const ContactForm = () => {
                         ></textarea>
                       </div>
                       
-                      <Button type="submit" className="flex items-center gap-2 bg-primary hover:bg-primary-600 dark:bg-[#FF7E3D] dark:hover:bg-[#FF570A] transition-colors duration-300">
+                      <Button 
+                        type="submit" 
+                        disabled={loading}
+                        className="flex items-center gap-2 bg-primary hover:bg-primary-600 dark:bg-[#FF7E3D] dark:hover:bg-[#FF570A] transition-colors duration-300"
+                      >
                         {loading ? "Sending..." : "Send Message"} <Send size={18} />
                       </Button>
-                      {responseMessage && (
-                        <p className={`text-${responseMessage.type === "success" ? "green" : "red"}-600`}>
-                          {responseMessage.text}
-                        </p>
-                      )}
                     </form>
                   </div>
                 </div>
