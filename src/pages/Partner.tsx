@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -241,13 +242,12 @@ const Partner = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <Button 
-  size="lg" 
-  className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white flex items-center gap-2"
-  onClick={() => window.location.href = '/contact'}
->
-  Apply for Franchise <ArrowRight size={18} />
-</Button>
-
+                  size="lg" 
+                  className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white flex items-center gap-2"
+                  onClick={() => window.location.href = '/contact'}
+                >
+                  Apply for Franchise <ArrowRight size={18} />
+                </Button>
               </motion.div>
             </div>
           </div>
@@ -565,7 +565,7 @@ const Partner = () => {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -620,4 +620,91 @@ const Partner = () => {
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-1 text-white/80">
+                      <label htmlFor="fullName" className="block text-sm font-medium mb-1 text-white/80">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                        placeholder="John Doe"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium mb-1 text-white/80">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                        placeholder="+91 12345 67890"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-1 text-white/80">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                      placeholder="john@example.com"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="location" className="block text-sm font-medium mb-1 text-white/80">
+                      Preferred Location
+                    </label>
+                    <input
+                      type="text"
+                      id="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                      placeholder="Mumbai, Maharashtra"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-1 text-white/80">
+                      Additional Information (Optional)
+                    </label>
+                    <textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={4}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                      placeholder="Tell us more about your expectations or questions..."
+                    ></textarea>
+                  </div>
+                  <Button 
+                    type="submit"
+                    className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
+                  </Button>
+                </form>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Partner;
