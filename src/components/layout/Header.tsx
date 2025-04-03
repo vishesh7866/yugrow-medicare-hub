@@ -32,9 +32,10 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
+  // Close mobile menu when route changes and scroll to top
   useEffect(() => {
     setIsOpen(false);
+    window.scrollTo(0, 0);
   }, [location]);
 
   const navItems = [
@@ -157,7 +158,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="fixed inset-0 bg-[#042652] dark:bg-[#021633] z-40 pt-16 md:hidden animate-fade-in">
+        <div className="fixed inset-0 bg-[#042652]/95 dark:bg-[#021633]/95 backdrop-blur-md z-40 pt-16 md:hidden animate-fade-in overflow-auto">
           <nav className="container mx-auto px-4 py-8 flex flex-col space-y-6">
             <Link
               to="/"
