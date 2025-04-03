@@ -1,17 +1,45 @@
+
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const CSR = () => {
   return (
     <>
       <Helmet>
-        <title>Corporate Social Responsibility - Yugrow Pharmacy</title>
+        <title>Corporate Social Responsibility | Yugrow Pharmacy Initiatives</title>
         <meta
           name="description"
-          content="Learn about Yugrow Pharmacy's corporate social responsibility initiatives and how we give back to the community."
+          content="Discover Yugrow Pharmacy's corporate social responsibility initiatives in healthcare access, education, and sustainability to build a better future for all."
         />
+        <meta name="keywords" content="Yugrow CSR, corporate social responsibility, healthcare initiatives, education support, sustainability, community welfare" />
+        <link rel="canonical" href="https://yugrowpharmacy.com/csr" />
+        <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": ["h1", "h2.text-3xl"]
+            },
+            "mainEntity": {
+              "@type": "Article",
+              "headline": "Corporate Social Responsibility at Yugrow Pharmacy",
+              "description": "Yugrow Pharmacy's CSR initiatives in healthcare access, education, and sustainability",
+              "publisher": {
+                "@type": "Organization",
+                "name": "Yugrow Pharmacy",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png"
+                }
+              }
+            }
+          }
+        `}
+        </script>
       </Helmet>
       <Header />
       

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import Footer from "../components/layout/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
+import { Helmet } from 'react-helmet-async';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -102,6 +104,39 @@ const ContactForm = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Contact Yugrow Pharmacy | Get In Touch With Our Team</title>
+        <meta name="description" content="Contact Yugrow Pharmacy for inquiries about generic medicines, franchise opportunities, or partnerships. Our team is ready to assist you." />
+        <meta name="keywords" content="contact Yugrow Pharmacy, pharmacy contact, generic medicine inquiry, franchise contact, pharmaceutical company contact" />
+        <link rel="canonical" href="https://yugrowpharmacy.com/contact" />
+        <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Yugrow Pharmacy",
+              "telephone": "+918097074455",
+              "email": "prm@yugrowpharmacy.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "1346/14, Gala No. R-108, 1st Floor, Jai Matadi Compound, Kalher",
+                "addressLocality": "Bhiwandi",
+                "addressRegion": "Maharashtra",
+                "postalCode": "421302",
+                "addressCountry": "IN"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+918097074455",
+                "contactType": "customer service"
+              }
+            }
+          }
+        `}
+        </script>
+      </Helmet>
       <Header />
       <main className="transition-colors duration-300">
         {/* Hero Section */}

@@ -2,7 +2,7 @@
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import {
   Accordion,
   AccordionContent,
@@ -65,8 +65,28 @@ const FAQPage = () => {
   return (
     <>
       <Helmet>
-        <title>Frequently Asked Questions - Yugrow Pharmacy</title>
-        <meta name="description" content="Find answers to common questions about Yugrow Pharmacy's generic medicines, franchise opportunities, and more." />
+        <title>Frequently Asked Questions | Yugrow Pharmacy - Generic Medicines</title>
+        <meta name="description" content="Get answers to common questions about Yugrow Pharmacy's generic medicines, franchise opportunities, quality standards, and business model." />
+        <meta name="keywords" content="Yugrow Pharmacy FAQ, generic medicine questions, franchise FAQ, medicine quality standards, pharmacy franchise investment" />
+        <link rel="canonical" href="https://yugrowpharmacy.com/faq" />
+        <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              ${faqs.map(faq => `{
+                "@type": "Question",
+                "name": "${faq.question}",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "${faq.answer.replace(/"/g, '\\"')}"
+                }
+              }`).join(',')}
+            ]
+          }
+        `}
+        </script>
       </Helmet>
       <Header />
       <main className="pt-20 min-h-screen">

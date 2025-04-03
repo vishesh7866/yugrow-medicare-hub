@@ -1,14 +1,27 @@
+
+# Allow all web crawlers (default)
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yugrowpharmacy.com/sitemap.xml
+
+# Specific directives for major search engines
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
+User-agent: Yandexbot
+Allow: /
+
+# Social media crawlers
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
-Allow: /
+# Don't index any potential admin areas
+Disallow: /admin/

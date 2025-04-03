@@ -21,8 +21,29 @@ const AboutUs = () => {
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <Helmet>
-        <title>About Us | Yugrow Pharmacy</title>
-        <meta name="description" content="Learn about Yugrow Pharmacy, our mission, vision, approach and why we are a trusted partner in healthcare." />
+        <title>About Yugrow Pharmacy | Leading Generic Medicine Manufacturer</title>
+        <meta name="description" content="Learn about Yugrow Pharmacy's mission to provide affordable generic medicines. WHO-GMP certified with 3,500+ products and expanding to 5,000 products." />
+        <meta name="keywords" content="about Yugrow Pharmacy, generic medicine manufacturer, WHO-GMP certified, pharmaceutical company India, medicine franchise" />
+        <link rel="canonical" href="https://yugrowpharmacy.com/about" />
+        <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Yugrow Pharmacy",
+              "description": "Leader in generic medicine manufacturing with 3,500+ products",
+              "foundingDate": "2010",
+              "foundingLocation": "Maharashtra, India"
+            },
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": ["h1", ".text-lg"]
+            }
+          }
+        `}
+        </script>
       </Helmet>
       
       <Header />

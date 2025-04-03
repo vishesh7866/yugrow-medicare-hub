@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { supabase } from '@/integrations/supabase/client';
@@ -112,8 +112,46 @@ const Careers = () => {
   return (
     <>
       <Helmet>
-        <title>Careers - Yugrow Pharmacy</title>
-        <meta name="description" content="Join Yugrow Pharmacy's team and build your career in the pharmaceutical industry. Find job opportunities and growth paths." />
+        <title>Career Opportunities at Yugrow Pharmacy | Join Our Team</title>
+        <meta name="description" content="Explore career opportunities at Yugrow Pharmacy. Join our dynamic team and build your career in the pharmaceutical industry with a WHO-GMP certified company." />
+        <meta name="keywords" content="Yugrow Pharmacy careers, pharmaceutical jobs, job opportunities, employment, pharmacy jobs, healthcare careers" />
+        <link rel="canonical" href="https://yugrowpharmacy.com/careers" />
+        <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "JobPosting",
+            "title": "Multiple Positions at Yugrow Pharmacy",
+            "description": "Yugrow Pharmacy is hiring for multiple positions including Pharmacy Manager, Marketing Specialist, and Supply Chain Coordinator.",
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "Yugrow Pharmacy",
+              "value": "YUGROW-CAREERS"
+            },
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "Yugrow Pharmacy",
+              "sameAs": "https://yugrowpharmacy.com",
+              "logo": "https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Multiple Locations",
+                "addressRegion": "Maharashtra",
+                "addressCountry": "IN"
+              }
+            },
+            "employmentType": "FULL_TIME",
+            "workHours": "40 hours per week",
+            "applicationContact": {
+              "@type": "ContactPoint",
+              "email": "careers@yugrowpharmacy.com"
+            }
+          }
+        `}
+        </script>
       </Helmet>
       <Header />
       <main className="pt-20 min-h-screen">
