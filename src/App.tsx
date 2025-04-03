@@ -1,11 +1,13 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Services from "./pages/Services";
+import Index from "./pages/Index";
+import AboutUs from "./pages/AboutUs";
+import ContactForm from "./pages/Contact";
+import CSR from "./pages/CSR";
 import Partner from "./pages/Partner";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
+import FAQPage from "./pages/FAQPage";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -15,12 +17,13 @@ function App() {
     <BrowserRouter>
       <ThemeProvider>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/csr" element={<CSR />} />
           <Route path="/partner" element={<Partner />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/faq" element={<FAQPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />
