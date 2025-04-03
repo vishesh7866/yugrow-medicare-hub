@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -27,26 +27,50 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log("Form submission started...");
 
     try {
-      // Submit to Supabase
-      const { data, error } = await supabase
-        .from('contact_inquiries')
-        .insert({
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message
-        });
+      // Try to submit to Express backend first
+      try {
+        console.log("Attempting to submit to Express backend...");
+        const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, formData);
+        console.log("Backend response:", response.data);
+        
+        if (response.data && response.data.success) {
+          console.log("Express submission successful");
+        } else {
+          console.log("Express submission failed, falling back to Supabase");
+          throw new Error("Backend submission failed");
+        }
+      } catch (backendError) {
+        // If backend fails, try Supabase as fallback
+        console.log("Falling back to Supabase submission...", backendError);
+        const { data, error } = await supabase
+          .from('contact_inquiries')
+          .insert({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            subject: formData.subject,
+            message: formData.message
+          });
 
-      if (error) throw error;
+        if (error) throw error;
+        console.log("Supabase submission successful:", data);
+      }
       
-      toast({
-        title: "Message Sent!",
-        description: "Thanks for reaching out. We'll get back to you soon.",
-      });
+      // If we reach here, at least one submission method worked
+      console.log("Showing success toast");
+      
+      // Force the toast to appear 
+      setTimeout(() => {
+        toast({
+          title: "Message Sent!",
+          description: "Thanks for reaching out. We'll get back to you soon.",
+          duration: 5000, // Show for 5 seconds
+        });
+      }, 100);
       
       // Reset the form
       setFormData({
@@ -59,14 +83,20 @@ const ContactForm = () => {
       });
       
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Submission Failed",
-        description: error.message || "Something went wrong. Please try again.",
-      });
       console.error("Error submitting contact form:", error);
+      
+      // Force the toast to appear
+      setTimeout(() => {
+        toast({
+          variant: "destructive",
+          title: "Submission Failed",
+          description: error.message || "Something went wrong. Please try again.",
+          duration: 5000, // Show for 5 seconds
+        });
+      }, 100);
     } finally {
       setLoading(false);
+      console.log("Form submission completed");
     }
   };
 
