@@ -66,7 +66,7 @@ const Header = () => {
             className="flex items-center"
           >
             <img 
-              src="/lovable-uploads/YUGROW_LOGO_PNG-removebg.png" 
+              src="/lovable-uploads/5a42e2fd-b7db-48a3-b0d1-4830ef06db0f.png" 
               alt="Yugrow Pharmacy Logo"
               className="h-10 md:h-12 transform hover:scale-105 transition-transform"
               onError={(e) => {
