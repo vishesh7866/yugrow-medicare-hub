@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -162,22 +161,22 @@ const Partner = () => {
 
   const testimonials = [
     {
-      name: "Rajesh Sharma",
+      name: "Priya Patil",
       location: "Mumbai, Maharashtra",
       quote: "Partnering with Yugrow Pharmacy has been transformative for my business. The support and training they provide is unmatched.",
-      avatar: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+      avatar: "/lovable-uploads/6bede60c-6392-4db6-aebb-f12814db68bc.png"
     },
     {
-      name: "Priya Patel",
+      name: "Rahul Singh",
       location: "Pune, Maharashtra",
       quote: "The low investment model and high-quality products have helped me establish a profitable pharmacy in just 6 months.",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+      avatar: "/lovable-uploads/91074e5f-d80c-4255-aa85-92331e942920.png"
     },
     {
-      name: "Suresh Kumar",
-      location: "Mumbai, Maharashtra",
+      name: "Vikram Deshmukh",
+      location: "Bangalore, Karnataka",
       quote: "The inventory management system and marketing support from Yugrow have been key to my franchise's success.",
-      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+      avatar: "/lovable-uploads/29e10bac-6954-425b-bc67-1092f26b225d.png"
     }
   ];
 
@@ -640,71 +639,3 @@ const Partner = () => {
                       <input
                         type="tel"
                         id="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
-                        placeholder="+91 12345 67890"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1 text-white/80">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
-                      placeholder="john@example.com"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="location" className="block text-sm font-medium mb-1 text-white/80">
-                      Preferred Location
-                    </label>
-                    <input
-                      type="text"
-                      id="location"
-                      value={formData.location}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
-                      placeholder="Mumbai, Maharashtra"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-1 text-white/80">
-                      Additional Information (Optional)
-                    </label>
-                    <textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
-                      placeholder="Tell us more about your expectations or questions..."
-                    ></textarea>
-                  </div>
-                  <Button 
-                    type="submit"
-                    className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
-                  </Button>
-                </form>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default Partner;
