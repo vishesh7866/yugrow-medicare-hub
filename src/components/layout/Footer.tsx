@@ -12,7 +12,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/5a42e2fd-b7db-48a3-b0d1-4830ef06db0f.png"
               alt="Yugrow Pharmacy Logo"
-              className="h-10 md:h-12 mb-4"
+              className="h-12 md:h-16 mb-4 transform hover:scale-110 transition-transform duration-300"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 console.error("Logo failed to load");
