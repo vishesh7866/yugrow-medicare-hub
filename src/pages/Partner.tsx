@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -560,7 +561,7 @@ const Partner = () => {
                     <svg className="absolute top-0 left-0 w-8 h-8 text-primary-200 opacity-20" fill="currentColor" viewBox="0 0 32 32">
                       <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                     </svg>
-                    <p className="relative pl-10 text-gray-600 dark:text-gray-300 italic">"{testimonial.quote}"</p>
+                    <p className="relative pl-10 text-gray-600 dark:text-gray-300 italic">{testimonial.quote}</p>
                   </div>
                 </motion.div>
               ))}
@@ -639,3 +640,73 @@ const Partner = () => {
                       <input
                         type="tel"
                         id="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                        placeholder="+91 99999 99999"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium mb-1 text-white/80">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                        placeholder="you@example.com"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="location" className="block text-sm font-medium mb-1 text-white/80">
+                        Preferred Location
+                      </label>
+                      <input
+                        type="text"
+                        id="location"
+                        value={formData.location}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                        placeholder="City, State"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-1 text-white/80">
+                      Message (Optional)
+                    </label>
+                    <textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={4}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FF7E3D]/50"
+                      placeholder="Tell us more about yourself and your interest in our franchise opportunity."
+                    ></textarea>
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit Enquiry"}
+                  </Button>
+                </form>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Partner;
