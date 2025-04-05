@@ -6,6 +6,7 @@ import ContactForm from "./pages/Contact";
 import CSR from "./pages/CSR";
 import Partner from "./pages/Partner";
 import Careers from "./pages/Careers";
+import OurTeam from "./pages/OurTeam";
 import NotFound from "./pages/NotFound";
 import FAQPage from "./pages/FAQPage";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/csr" element={<CSR />} />
             <Route path="/partner" element={<Partner />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/our-team" element={<OurTeam />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

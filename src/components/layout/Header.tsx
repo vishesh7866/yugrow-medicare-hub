@@ -32,9 +32,10 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
+  // Close mobile menu when route changes and scroll to top
   useEffect(() => {
     setIsOpen(false);
+    window.scrollTo(0, 0);
   }, [location]);
 
   const navItems = [
@@ -46,6 +47,7 @@ const Header = () => {
 
   const partnerDropdownItems = [
     { name: 'Partner With Us', path: '/partner' },
+    { name: 'Our Team', path: '/our-team' },
     { name: 'Careers', path: '/careers' },
     { name: 'CSR', path: '/csr' },
     { name: 'FAQ', path: '/faq' },
@@ -88,7 +90,8 @@ const Header = () => {
                         location.pathname === item.path || 
                         location.pathname === '/careers' || 
                         location.pathname === '/csr' || 
-                        location.pathname === '/faq'
+                        location.pathname === '/faq' ||
+                        location.pathname === '/our-team'
                           ? 'text-[#FF7E3D]' 
                           : 'text-white'
                       }`}>
@@ -157,7 +160,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="fixed inset-0 bg-[#042652] dark:bg-[#021633] z-40 pt-16 md:hidden animate-fade-in">
+        <div className="fixed inset-0 bg-[#042652]/95 dark:bg-[#021633]/95 backdrop-blur-sm z-40 pt-16 md:hidden animate-fade-in">
           <nav className="container mx-auto px-4 py-8 flex flex-col space-y-6">
             <Link
               to="/"
@@ -187,7 +190,8 @@ const Header = () => {
                   location.pathname === "/partner" || 
                   location.pathname === '/careers' || 
                   location.pathname === '/csr' || 
-                  location.pathname === '/faq'
+                  location.pathname === '/faq' ||
+                  location.pathname === '/our-team'
                     ? 'text-[#FF7E3D]' 
                     : 'text-white'
                 }`}
