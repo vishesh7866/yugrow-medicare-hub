@@ -18,9 +18,9 @@ import CookieConsent from "@/components/CookieConsent";
 function App() {
   return (
     <HelmetProvider>
-      <CookieConsentProvider>
-        <BrowserRouter>
-          <ThemeProvider>
+      <ThemeProvider defaultTheme="dark">
+        <CookieConsentProvider>
+          <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<AboutUs />} />
@@ -34,9 +34,9 @@ function App() {
             </Routes>
             <CookieConsent />
             <Toaster />
-          </ThemeProvider>
-        </BrowserRouter>
-      </CookieConsentProvider>
+          </BrowserRouter>
+        </CookieConsentProvider>
+      </ThemeProvider>
     </HelmetProvider>
   );
 }
