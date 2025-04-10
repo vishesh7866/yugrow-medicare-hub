@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { Helmet } from 'react-helmet-async';
+import ReCaptcha from "@/components/ReCaptcha";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -19,15 +19,31 @@ const ContactForm = () => {
     subject: "",
     message: "",
   });
-
+  
+  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  const handleRecaptchaChange = (token: string) => {
+    setRecaptchaToken(token);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!recaptchaToken) {
+      toast({
+        variant: "destructive",
+        title: "reCAPTCHA Required",
+        description: "Please complete the reCAPTCHA verification.",
+        duration: 5000,
+      });
+      return;
+    }
+    
     setLoading(true);
     console.log("Form submission started...");
 
@@ -35,7 +51,10 @@ const ContactForm = () => {
       // Try to submit to Express backend first
       try {
         console.log("Attempting to submit to Express backend...");
-        const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, formData);
+        const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, {
+          ...formData,
+          recaptchaToken
+        });
         console.log("Backend response:", response.data);
         
         if (response.data && response.data.success) {
@@ -55,7 +74,8 @@ const ContactForm = () => {
             email: formData.email,
             phone: formData.phone,
             subject: formData.subject,
-            message: formData.message
+            message: formData.message,
+            recaptcha_verified: !!recaptchaToken
           });
 
         if (error) throw error;
@@ -83,6 +103,12 @@ const ContactForm = () => {
         subject: "",
         message: ""
       });
+      setRecaptchaToken("");
+      
+      // Reset reCAPTCHA
+      if (window.grecaptcha) {
+        window.grecaptcha.reset();
+      }
       
     } catch (error) {
       console.error("Error submitting contact form:", error);
@@ -337,9 +363,17 @@ const ContactForm = () => {
                         ></textarea>
                       </div>
                       
+                      {/* Add reCAPTCHA component */}
+                      <div className="mt-4">
+                        <ReCaptcha 
+                          sitekey="6LdmGxMrAAAAAFR7bdzwdXHF6QdYGNTdEPBpvQDw"
+                          onChange={handleRecaptchaChange}
+                        />
+                      </div>
+                      
                       <Button 
                         type="submit" 
-                        disabled={loading}
+                        disabled={loading || !recaptchaToken}
                         className="flex items-center gap-2 bg-primary hover:bg-primary-600 dark:bg-[#FF7E3D] dark:hover:bg-[#FF570A] transition-colors duration-300"
                       >
                         {loading ? "Sending..." : "Send Message"} <Send size={18} />
