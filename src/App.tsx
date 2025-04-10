@@ -12,26 +12,31 @@ import FAQPage from "./pages/FAQPage";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { HelmetProvider } from "react-helmet-async";
+import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
+import CookieConsent from "@/components/CookieConsent";
 
 function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <ThemeProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactForm />} />
-            <Route path="/csr" element={<CSR />} />
-            <Route path="/partner" element={<Partner />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/our-team" element={<OurTeam />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Toaster />
-        </ThemeProvider>
-      </BrowserRouter>
+      <CookieConsentProvider>
+        <BrowserRouter>
+          <ThemeProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactForm />} />
+              <Route path="/csr" element={<CSR />} />
+              <Route path="/partner" element={<Partner />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/our-team" element={<OurTeam />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <CookieConsent />
+            <Toaster />
+          </ThemeProvider>
+        </BrowserRouter>
+      </CookieConsentProvider>
     </HelmetProvider>
   );
 }
