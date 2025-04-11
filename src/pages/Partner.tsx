@@ -26,7 +26,7 @@ const Partner = () => {
   });
   
   const [recaptchaToken, setRecaptchaToken] = useState("");
-  const [isSubmitting, setIsSubmitting = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -643,5 +643,4 @@ const Partner = () => {
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium mb-1 text-white/80">
                         Full Name
-                      </label>
-                      <
+                      </label
