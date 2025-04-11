@@ -26,7 +26,7 @@ const Partner = () => {
   });
   
   const [recaptchaToken, setRecaptchaToken] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -175,7 +175,6 @@ const Partner = () => {
       description: "Sign the franchise agreement and begin comprehensive training on pharmacy operations."
     },
     {
-      number: "06",
       icon: <Store className="h-8 w-8 text-primary" />,
       title: "Store Setup & Launch",
       description: "Set up your store with our guidance and officially launch your Yugrow Pharmacy franchise."
@@ -643,4 +642,6 @@ const Partner = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium mb-1 text-white/80">
-                        Full
+                        Full Name
+                      </label>
+                      <
