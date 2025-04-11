@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-// Initial state - disabled until consent
-setAnalyticsCollectionEnabled(analytics, false);
+// Enable analytics by default (user can disable later if needed)
+setAnalyticsCollectionEnabled(analytics, true);
 
 export { app, analytics, db };
