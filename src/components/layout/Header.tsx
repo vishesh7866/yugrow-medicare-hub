@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import {
@@ -10,13 +11,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from '@/lib/utils';
+import Sidebar from './Sidebar';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,9 +30,8 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes and scroll to top
+  // Scroll to top when route changes
   useEffect(() => {
-    setIsOpen(false);
     window.scrollTo(0, 0);
   }, [location]);
 
@@ -143,95 +141,13 @@ const Header = () => {
             <ThemeToggle />
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button & Theme Toggle */}
           <div className="flex items-center space-x-4 md:hidden">
             <ThemeToggle />
-            <button
-              className="text-white"
-              onClick={toggleMenu}
-              aria-label="Toggle Menu"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <Sidebar />
           </div>
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-[#042652]/95 dark:bg-[#021633]/95 backdrop-blur-sm z-40 pt-16 md:hidden animate-fade-in">
-          <nav className="container mx-auto px-4 py-8 flex flex-col space-y-6">
-            <Link
-              to="/"
-              className={`text-lg font-medium transition-colors hover:text-[#FF7E3D] ${
-                location.pathname === "/" 
-                  ? 'text-[#FF7E3D]' 
-                  : 'text-white'
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className={`text-lg font-medium transition-colors hover:text-[#FF7E3D] ${
-                location.pathname === "/about" 
-                  ? 'text-[#FF7E3D]' 
-                  : 'text-white'
-              }`}
-            >
-              About Us
-            </Link>
-            
-            {/* Mobile Partner With Us Dropdown */}
-            <div className="space-y-2">
-              <div
-                className={`text-lg font-medium transition-colors hover:text-[#FF7E3D] flex items-center justify-between ${
-                  location.pathname === "/partner" || 
-                  location.pathname === '/careers' || 
-                  location.pathname === '/csr' || 
-                  location.pathname === '/faq' ||
-                  location.pathname === '/our-team'
-                    ? 'text-[#FF7E3D]' 
-                    : 'text-white'
-                }`}
-              >
-                <span>Partner With Us</span>
-                <ChevronDown size={20} />
-              </div>
-              <div className="pl-4 space-y-2 border-l-2 border-[#FF7E3D]/30">
-                {partnerDropdownItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`block text-base font-medium transition-colors hover:text-[#FF7E3D] ${
-                      location.pathname === item.path 
-                        ? 'text-[#FF7E3D]' 
-                        : 'text-white/80'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            
-            <Link
-              to="/contact"
-              className={`text-lg font-medium transition-colors hover:text-[#FF7E3D] ${
-                location.pathname === "/contact" 
-                  ? 'text-[#FF7E3D]' 
-                  : 'text-white'
-              }`}
-            >
-              Contact
-            </Link>
-            
-            <a href="http://brainyug.com/" className="mt-4">
-              <Button className="bg-[#FF7E3D] w-full hover:bg-[#FF7E3D]/80 text-white">Login Now</Button>
-            </a>
-          </nav>
-        </div>
-      )}
     </header>
   );
 };
