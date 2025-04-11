@@ -7,22 +7,22 @@ const Testimonials = () => {
     {
       id: 1,
       quote: "Yugrow Pharmacy's generic medicines have made my regular medication affordable. I save almost 70% on my monthly expenses.",
-      name: "Rahul Sharma",
+      name: "Vishesh Sanghvi",
       title: "Regular Customer",
       location: "Mumbai"
     },
     {
       id: 2,
       quote: "As a franchise partner, the support from Yugrow has been exceptional. The FOFO model is truly profitable and well-structured.",
-      name: "Priya Patel",
-      title: "Franchise Owner",
-      location: "Pune"
+      name: "Gaurav Mishra",
+      title: "Regular Customer",
+      location: "Mumbai"
     },
     {
       id: 3,
       quote: "The quality of generic medicines from Yugrow is on par with branded alternatives. I've been recommending them to all my patients.",
-      name: "Dr. Vikram Singh",
-      title: "General Physician",
+      name: "Ravi Maurya",
+      title: "Regular Customer",
       location: "Mumbai"
     }
   ];

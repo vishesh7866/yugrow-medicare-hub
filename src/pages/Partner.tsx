@@ -184,20 +184,20 @@ const Partner = () => {
 
   const testimonials = [
     {
-      name: "Priya Patil",
+      name: "Sheetal Patil",
       location: "Mumbai, Maharashtra",
       quote: "Partnering with Yugrow Pharmacy has been transformative for my business. The support and training they provide is unmatched.",
       avatar: "/lovable-uploads/6bede60c-6392-4db6-aebb-f12814db68bc.png"
     },
     {
-      name: "Rahul Singh",
-      location: "Pune, Maharashtra",
+      name: "Rajveer Singh",
+      location: "Mumbai, Maharashtra",
       quote: "The low investment model and high-quality products have helped me establish a profitable pharmacy in just 6 months.",
       avatar: "/lovable-uploads/91074e5f-d80c-4255-aa85-92331e942920.png"
     },
     {
-      name: "Vikram Deshmukh",
-      location: "Bangalore, Karnataka",
+      name: "Vishesh Sanghvi",
+      location: "Mumbai, Maharashtra",
       quote: "The inventory management system and marketing support from Yugrow have been key to my franchise's success.",
       avatar: "/lovable-uploads/29e10bac-6954-425b-bc67-1092f26b225d.png"
     }
