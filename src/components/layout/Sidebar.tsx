@@ -22,6 +22,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/components/theme-provider';
 
 type NavItem = {
   label: string;
@@ -32,6 +33,7 @@ type NavItem = {
 const Sidebar = () => {
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
+  const { theme } = useTheme();
   
   const navItems: NavItem[] = [
     {
@@ -76,13 +78,15 @@ const Sidebar = () => {
     }
   ];
 
+  const isHighlighted = (href: string) => location.pathname === href;
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button 
           variant="ghost" 
           size="icon" 
-          className="md:hidden"
+          className={`md:hidden ${theme === 'light' ? 'text-gray-800' : 'text-white'}`}
           aria-label="Menu"
         >
           <Menu className="h-6 w-6" />
@@ -103,9 +107,13 @@ const Sidebar = () => {
                   to={item.href} 
                   className={cn(
                     "flex items-center gap-3 rounded-md px-3 py-3 text-sm font-medium transition-all",
-                    location.pathname === item.href 
-                      ? "bg-[#FF7E3D]/10 text-[#FF7E3D]" 
-                      : "hover:bg-muted"
+                    isHighlighted(item.href)
+                      ? theme === 'light' 
+                        ? "bg-[#FF7E3D]/10 text-[#FF7E3D]" 
+                        : "bg-[#FF7E3D]/10 text-[#FF7E3D]"
+                      : theme === 'light'
+                        ? "hover:bg-gray-100 text-gray-800"
+                        : "hover:bg-muted text-white"
                   )}
                   onClick={() => setOpen(false)}
                 >
