@@ -66,11 +66,11 @@ const Sidebar = () => {
       href: "/careers",
       icon: <Briefcase className="h-5 w-5" />
     },
-    {
-      label: "Our Team",
-      href: "/our-team",
-      icon: <Users className="h-5 w-5" />
-    },
+    // {
+    //   label: "Our Team",
+    //   href: "/our-team",
+    //   icon: <Users className="h-5 w-5" />
+    // },
     {
       label: "FAQ",
       href: "/faq",

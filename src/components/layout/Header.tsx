@@ -44,7 +44,7 @@ const Header = () => {
 
   const partnerDropdownItems = [
     { name: 'Partner With Us', path: '/partner' },
-    { name: 'Our Team', path: '/our-team' },
+    // { name: 'Our Team', path: '/our-team' },
     { name: 'Careers', path: '/careers' },
     { name: 'CSR', path: '/csr' },
     { name: 'FAQ', path: '/faq' },
