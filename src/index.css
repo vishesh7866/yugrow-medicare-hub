@@ -96,6 +96,41 @@
   .btn-dark-mode {
     @apply border-white/20 bg-white/10 text-white hover:bg-white/20;
   }
+  
+  /* 3D effect classes */
+  .card-3d {
+    @apply transition-all duration-300;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .card-3d-content {
+    @apply transition-all duration-300;
+    transform-style: preserve-3d;
+  }
+  
+  .text-outline {
+    -webkit-text-stroke: 1px rgba(255, 126, 61, 0.5);
+    color: transparent;
+  }
+  
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(var(--gradient-angle), #FF7E3D, #076FD8, #FF7E3D);
+    animation: gradient-border 6s linear infinite;
+  }
+  
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  
+  @keyframes gradient-border {
+    0% { --gradient-angle: 0deg; }
+    100% { --gradient-angle: 360deg; }
+  }
 }
 
 @layer utilities {
@@ -126,12 +161,36 @@
     }
   }
   
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 126, 61, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 126, 61, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 126, 61, 0); }
+  }
+  
+  @keyframes text-shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: -200% center; }
+  }
+  
   .animate-float {
     animation: float 15s ease-in-out infinite;
   }
   
   .animate-glow {
     animation: glow 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+  
+  .animate-text-shimmer {
+    animation: text-shimmer 2.5s ease-in-out infinite;
+    background: linear-gradient(90deg, #FF7E3D, #FF9C60, #FF7E3D);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
   @keyframes slide-in {
@@ -191,4 +250,42 @@
   .animate-fade-in {
     animation: fade-in 0.6s ease-out forwards;
   }
+
+  /* 3D hover effect utilities */
+  .hover-3d {
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+  }
+  
+  .hover-3d:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+  }
+  
+  .hover-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hover-shine::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    z-index: 10;
+  }
+  
+  .hover-shine:hover::before {
+    top: 100%;
+    left: 100%;
+  }
 }
+
