@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Users, Activity, Store, TrendingDown } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const Statistics = () => {
   const [animatedValues, setAnimatedValues] = useState({
@@ -19,7 +19,7 @@ const Statistics = () => {
   };
 
   const containerRef = React.useRef(null);
-  const isInView = useInView(containerRef, { once: true, threshold: 0.2 });
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
     if (isInView) {

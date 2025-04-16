@@ -2,7 +2,7 @@
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
-export function useScrollAnimation(options = { once: true, threshold: 0.2 }) {
+export function useScrollAnimation(options = { once: true, amount: 0.2 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, options);
   
