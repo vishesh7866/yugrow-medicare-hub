@@ -363,7 +363,7 @@ const ContactForm = () => {
                         ></textarea>
                       </div>
                       
-                      {/* Add reCAPTCHA component with updated site key */}
+                      {/* Add reCAPTCHA component with site key */}
                       <div className="mt-4">
                         <ReCaptcha 
                           sitekey="6LdmGxMrAAAAAFR7bdzwdXHF6QdYGNTdEPBpvQDw"

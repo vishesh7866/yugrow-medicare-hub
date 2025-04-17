@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -176,6 +175,7 @@ const Partner = () => {
       description: "Sign the franchise agreement and begin comprehensive training on pharmacy operations."
     },
     {
+      number: "06",
       icon: <Store className="h-8 w-8 text-primary" />,
       title: "Store Setup & Launch",
       description: "Set up your store with our guidance and officially launch your Yugrow Pharmacy franchise."
@@ -644,96 +644,3 @@ const Partner = () => {
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium mb-1 text-white/80">
                         Full Name
-                      </label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md text-white placeholder-white/50"
-                        placeholder="Your full name"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium mb-1 text-white/80">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md text-white placeholder-white/50"
-                        placeholder="Your contact number"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1 text-white/80">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md text-white placeholder-white/50"
-                      placeholder="Your email address"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="location" className="block text-sm font-medium mb-1 text-white/80">
-                      Preferred Location
-                    </label>
-                    <input
-                      type="text"
-                      id="location"
-                      value={formData.location}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md text-white placeholder-white/50"
-                      placeholder="City, State"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-1 text-white/80">
-                      Message (Optional)
-                    </label>
-                    <textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md text-white placeholder-white/50"
-                      placeholder="Tell us more about your requirements"
-                    ></textarea>
-                  </div>
-                  
-                  <div className="mt-4">
-                    <ReCaptcha sitekey="6LdmGxMrAAAAAFR7bdzwdXHF6QdYGNTdEPBpvQDw" onChange={handleRecaptchaChange} />
-                  </div>
-                  
-                  <div>
-                    <Button
-                      type="submit"
-                      className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white py-2 px-4 rounded-md transition-colors"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? "Sending..." : "Submit Inquiry"}
-                    </Button>
-                  </div>
-                </form>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default Partner;
