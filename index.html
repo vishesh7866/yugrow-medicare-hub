@@ -31,6 +31,15 @@
     <meta name="geo.placename" content="India" />
     <meta name="theme-color" content="#076FD8" />
 
+    <!-- Script to define global onRecaptchaLoad function -->
+    <script>
+      window.onRecaptchaLoad = function() {
+        console.log('reCAPTCHA script loaded successfully');
+        // This will be called when reCAPTCHA is ready
+        window.dispatchEvent(new Event('recaptchaLoaded'));
+      };
+    </script>
+    
     <!-- Google reCAPTCHA v2 -->
     <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 

@@ -1,5 +1,5 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 interface ReCaptchaProps {
   sitekey: string;
@@ -22,10 +22,28 @@ declare global {
 const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
+  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+
+  // Listen for the recaptchaLoaded event
+  useEffect(() => {
+    const handleRecaptchaLoaded = () => {
+      setIsScriptLoaded(true);
+    };
+
+    window.addEventListener('recaptchaLoaded', handleRecaptchaLoaded);
+    
+    // Check if grecaptcha is already available
+    if (window.grecaptcha) {
+      setIsScriptLoaded(true);
+    }
+
+    return () => {
+      window.removeEventListener('recaptchaLoaded', handleRecaptchaLoaded);
+    };
+  }, []);
 
   useEffect(() => {
-    if (!sitekey) {
-      console.error("ReCaptcha Error: No sitekey provided");
+    if (!isScriptLoaded || !sitekey) {
       return;
     }
 
@@ -39,39 +57,26 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
       widgetIdRef.current = null;
     }
 
-    // Initialize reCAPTCHA when component mounts
-    const initializeRecaptcha = () => {
+    // Initialize reCAPTCHA
+    const renderRecaptcha = () => {
       if (!containerRef.current || !window.grecaptcha) {
-        console.warn("Container ref or grecaptcha not available:", { 
-          containerRef: containerRef.current ? "available" : "not available", 
-          grecaptcha: window.grecaptcha ? "available" : "not available" 
-        });
         return;
       }
 
       try {
-        console.log("Initializing reCAPTCHA with site key:", sitekey);
         widgetIdRef.current = window.grecaptcha.render(containerRef.current, {
           sitekey: sitekey,
+          theme: 'dark', // Apply dark theme
           callback: onChange,
           'expired-callback': () => onChange(''),
           'error-callback': () => onChange('')
         });
-        console.log("reCAPTCHA initialized successfully with widget ID:", widgetIdRef.current);
       } catch (error) {
         console.error('reCAPTCHA initialization error:', error);
       }
     };
 
-    // Check if grecaptcha is already loaded
-    if (window.grecaptcha && window.grecaptcha.ready) {
-      console.log("grecaptcha is already loaded, initializing...");
-      window.grecaptcha.ready(initializeRecaptcha);
-    } else {
-      // If not loaded yet, set up a callback for when it loads
-      console.log("grecaptcha not loaded yet, setting up onRecaptchaLoad callback");
-      window.onRecaptchaLoad = initializeRecaptcha;
-    }
+    renderRecaptcha();
 
     // Clean up when component unmounts
     return () => {
@@ -83,7 +88,7 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
         }
       }
     };
-  }, [sitekey, onChange]);
+  }, [isScriptLoaded, sitekey, onChange]);
 
   return <div ref={containerRef} className="g-recaptcha mb-4" data-sitekey={sitekey} />;
 };

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,8 +6,8 @@ import Footer from '../components/layout/Footer';
 import { useTheme } from '@/components/theme-provider';
 import { motion } from 'framer-motion';
 import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import ReCaptcha from '@/components/ReCaptcha';
+import { useToast } from "@/hooks/use-toast";
+import ReCaptcha from "@/components/ReCaptcha";
 
 const Partner = () => {
   useEffect(() => {
@@ -644,96 +643,3 @@ const Partner = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium mb-1 text-white/80">
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
-                        placeholder="Your Name"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium mb-1 text-white/80">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
-                        placeholder="Your Phone"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1 text-white/80">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
-                      placeholder="Your Email"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="location" className="block text-sm font-medium mb-1 text-white/80">
-                      Preferred Location
-                    </label>
-                    <input
-                      type="text"
-                      id="location"
-                      value={formData.location}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
-                      placeholder="City, State"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-1 text-white/80">
-                      Message (Optional)
-                    </label>
-                    <textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={3}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50"
-                      placeholder="Any specific questions or information..."
-                    ></textarea>
-                  </div>
-                  
-                  <ReCaptcha 
-                    sitekey="6LdmGxMrAAAAAFR7bdzwdXHF6QdYGNTdEPBpvQDw"
-                    onChange={handleRecaptchaChange}
-                  />
-                  
-                  <Button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-[#FF7E3D] hover:bg-[#FF7E3D]/80 text-white"
-                  >
-                    {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
-                  </Button>
-                </form>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default Partner;
