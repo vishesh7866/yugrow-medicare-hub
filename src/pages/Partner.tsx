@@ -29,7 +29,7 @@ const Partner = () => {
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -41,7 +41,7 @@ const Partner = () => {
     setRecaptchaToken(token);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (!recaptchaToken) {
@@ -84,12 +84,12 @@ const Partner = () => {
       });
       setRecaptchaToken("");
       
-      // Reset reCAPTCHA
-      if (window.grecaptcha) {
+      // Reset reCAPTCHA - Now safely typed with our declaration file
+      if (typeof window !== 'undefined' && window.grecaptcha) {
         window.grecaptcha.reset();
       }
       
-    } catch (error) {
+    } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Submission Failed",
