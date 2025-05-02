@@ -33,9 +33,10 @@
 
     <!-- Script to define global onRecaptchaLoad function -->
     <script>
+      // Initialize the onRecaptchaLoad function globally
       window.onRecaptchaLoad = function() {
         console.log('reCAPTCHA script loaded successfully');
-        // This will be called when reCAPTCHA is ready
+        // Dispatch an event that our React components can listen for
         window.dispatchEvent(new Event('recaptchaLoaded'));
       };
     </script>

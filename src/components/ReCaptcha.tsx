@@ -23,10 +23,14 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
 
   // Listen for the recaptchaLoaded event
   useEffect(() => {
+    console.log('Initializing reCAPTCHA with site key:', sitekey);
+    
     const handleRecaptchaLoaded = () => {
+      console.log('grecaptcha is loaded via event');
       setIsScriptLoaded(true);
     };
 
@@ -34,6 +38,7 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
     
     // Check if grecaptcha is already available
     if (window.grecaptcha) {
+      console.log('grecaptcha is already loaded, initializing...');
       setIsScriptLoaded(true);
     }
 
@@ -43,7 +48,7 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
   }, []);
 
   useEffect(() => {
-    if (!isScriptLoaded || !sitekey) {
+    if (!isScriptLoaded || !sitekey || !containerRef.current || isRendered) {
       return;
     }
 
@@ -64,22 +69,38 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
       }
 
       try {
+        console.log('Rendering reCAPTCHA...');
         widgetIdRef.current = window.grecaptcha.render(containerRef.current, {
           sitekey: sitekey,
           theme: 'dark', // Apply dark theme
-          callback: onChange,
-          'expired-callback': () => onChange(''),
-          'error-callback': () => onChange('')
+          callback: (token: string) => {
+            onChange(token);
+            console.log('reCAPTCHA verified');
+          },
+          'expired-callback': () => {
+            onChange('');
+            console.log('reCAPTCHA expired');
+          },
+          'error-callback': () => {
+            onChange('');
+            console.error('reCAPTCHA error');
+          }
         });
+        setIsRendered(true);
+        console.log('reCAPTCHA initialized successfully with widget ID:', widgetIdRef.current);
       } catch (error) {
         console.error('reCAPTCHA initialization error:', error);
       }
     };
 
-    renderRecaptcha();
+    // Add a small delay to ensure DOM is fully ready
+    const timeoutId = setTimeout(() => {
+      renderRecaptcha();
+    }, 100);
 
     // Clean up when component unmounts
     return () => {
+      clearTimeout(timeoutId);
       if (widgetIdRef.current !== null && window.grecaptcha) {
         try {
           window.grecaptcha.reset(widgetIdRef.current);
@@ -88,7 +109,7 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
         }
       }
     };
-  }, [isScriptLoaded, sitekey, onChange]);
+  }, [isScriptLoaded, sitekey, onChange, isRendered]);
 
   return <div ref={containerRef} className="g-recaptcha mb-4" data-sitekey={sitekey} />;
 };
