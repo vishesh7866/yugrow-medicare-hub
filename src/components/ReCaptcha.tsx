@@ -24,32 +24,42 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
   const widgetIdRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (!sitekey) {
+      console.error("ReCaptcha Error: No sitekey provided");
+      return;
+    }
+
     // Clear any existing reCAPTCHA instances
     if (widgetIdRef.current !== null && window.grecaptcha) {
-      window.grecaptcha.reset(widgetIdRef.current);
+      try {
+        window.grecaptcha.reset(widgetIdRef.current);
+      } catch (e) {
+        console.error("Error resetting reCAPTCHA:", e);
+      }
       widgetIdRef.current = null;
     }
 
     // Initialize reCAPTCHA when component mounts
     const initializeRecaptcha = () => {
-      if (containerRef.current && window.grecaptcha) {
-        try {
-          console.log("Initializing reCAPTCHA with site key:", sitekey);
-          widgetIdRef.current = window.grecaptcha.render(containerRef.current, {
-            sitekey: sitekey,
-            callback: onChange,
-            'expired-callback': () => onChange(''),
-            'error-callback': () => onChange('')
-          });
-          console.log("reCAPTCHA initialized successfully with widget ID:", widgetIdRef.current);
-        } catch (error) {
-          console.error('reCAPTCHA initialization error:', error);
-        }
-      } else {
+      if (!containerRef.current || !window.grecaptcha) {
         console.warn("Container ref or grecaptcha not available:", { 
           containerRef: containerRef.current ? "available" : "not available", 
           grecaptcha: window.grecaptcha ? "available" : "not available" 
         });
+        return;
+      }
+
+      try {
+        console.log("Initializing reCAPTCHA with site key:", sitekey);
+        widgetIdRef.current = window.grecaptcha.render(containerRef.current, {
+          sitekey: sitekey,
+          callback: onChange,
+          'expired-callback': () => onChange(''),
+          'error-callback': () => onChange('')
+        });
+        console.log("reCAPTCHA initialized successfully with widget ID:", widgetIdRef.current);
+      } catch (error) {
+        console.error('reCAPTCHA initialization error:', error);
       }
     };
 
@@ -75,7 +85,7 @@ const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
     };
   }, [sitekey, onChange]);
 
-  return <div ref={containerRef} className="g-recaptcha mb-4" />;
+  return <div ref={containerRef} className="g-recaptcha mb-4" data-sitekey={sitekey} />;
 };
 
 export default ReCaptcha;
