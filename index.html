@@ -31,18 +31,28 @@
     <meta name="geo.placename" content="India" />
     <meta name="theme-color" content="#076FD8" />
 
-    <!-- Script to define global onRecaptchaLoad function -->
+    <!-- Script to define global onRecaptchaLoad function but don't load recaptcha -->
     <script>
-      // Initialize the onRecaptchaLoad function globally
+      // Initialize the onRecaptchaLoad function globally as a dummy function
       window.onRecaptchaLoad = function() {
-        console.log('reCAPTCHA script loaded successfully');
-        // Dispatch an event that our React components can listen for
+        console.log('reCAPTCHA functionality is disabled but function exists for compatibility');
         window.dispatchEvent(new Event('recaptchaLoaded'));
       };
+      
+      // Create a mock grecaptcha object to prevent errors
+      window.grecaptcha = {
+        ready: (callback) => setTimeout(callback, 10),
+        execute: () => Promise.resolve("dummy-token"),
+        render: () => 1,
+        reset: () => {},
+        getResponse: () => "dummy-token"
+      };
+      
+      // Dispatch the event immediately since we're not loading the real script
+      setTimeout(() => {
+        window.onRecaptchaLoad();
+      }, 100);
     </script>
-    
-    <!-- Google reCAPTCHA v2 -->
-    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />

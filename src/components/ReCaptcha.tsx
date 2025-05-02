@@ -1,117 +1,25 @@
 
-import { useRef, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 interface ReCaptchaProps {
   sitekey: string;
   onChange: (token: string) => void;
 }
 
-declare global {
-  interface Window {
-    grecaptcha: {
-      ready: (callback: () => void) => void;
-      execute: (sitekey: string, options: { action: string }) => Promise<string>;
-      render: (container: HTMLElement, options: any) => number;
-      reset: (widgetId?: number) => void;
-      getResponse: (widgetId?: number) => string;
-    };
-    onRecaptchaLoad: () => void;
-  }
-}
-
+// This is a mock implementation that doesn't actually load or display reCAPTCHA
 const ReCaptcha = ({ sitekey, onChange }: ReCaptchaProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const widgetIdRef = useRef<number | null>(null);
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-  const [isRendered, setIsRendered] = useState(false);
-
-  // Listen for the recaptchaLoaded event
+  
+  // Generate a fake token and call onChange when mounted
   useEffect(() => {
-    console.log('Initializing reCAPTCHA with site key:', sitekey);
+    // Call onChange with a fake token
+    const mockToken = "mock-recaptcha-token-for-compatibility";
+    onChange(mockToken);
     
-    const handleRecaptchaLoaded = () => {
-      console.log('grecaptcha is loaded via event');
-      setIsScriptLoaded(true);
-    };
+    console.log('Mock reCAPTCHA initialized. No actual verification will happen.');
+  }, [onChange]);
 
-    window.addEventListener('recaptchaLoaded', handleRecaptchaLoaded);
-    
-    // Check if grecaptcha is already available
-    if (window.grecaptcha) {
-      console.log('grecaptcha is already loaded, initializing...');
-      setIsScriptLoaded(true);
-    }
-
-    return () => {
-      window.removeEventListener('recaptchaLoaded', handleRecaptchaLoaded);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isScriptLoaded || !sitekey || !containerRef.current || isRendered) {
-      return;
-    }
-
-    // Clear any existing reCAPTCHA instances
-    if (widgetIdRef.current !== null && window.grecaptcha) {
-      try {
-        window.grecaptcha.reset(widgetIdRef.current);
-      } catch (e) {
-        console.error("Error resetting reCAPTCHA:", e);
-      }
-      widgetIdRef.current = null;
-    }
-
-    // Initialize reCAPTCHA
-    const renderRecaptcha = () => {
-      if (!containerRef.current || !window.grecaptcha) {
-        return;
-      }
-
-      try {
-        console.log('Rendering reCAPTCHA...');
-        widgetIdRef.current = window.grecaptcha.render(containerRef.current, {
-          sitekey: sitekey,
-          theme: 'dark', // Apply dark theme
-          callback: (token: string) => {
-            onChange(token);
-            console.log('reCAPTCHA verified');
-          },
-          'expired-callback': () => {
-            onChange('');
-            console.log('reCAPTCHA expired');
-          },
-          'error-callback': () => {
-            onChange('');
-            console.error('reCAPTCHA error');
-          }
-        });
-        setIsRendered(true);
-        console.log('reCAPTCHA initialized successfully with widget ID:', widgetIdRef.current);
-      } catch (error) {
-        console.error('reCAPTCHA initialization error:', error);
-      }
-    };
-
-    // Add a small delay to ensure DOM is fully ready
-    const timeoutId = setTimeout(() => {
-      renderRecaptcha();
-    }, 100);
-
-    // Clean up when component unmounts
-    return () => {
-      clearTimeout(timeoutId);
-      if (widgetIdRef.current !== null && window.grecaptcha) {
-        try {
-          window.grecaptcha.reset(widgetIdRef.current);
-        } catch (error) {
-          console.error('Error resetting reCAPTCHA:', error);
-        }
-      }
-    };
-  }, [isScriptLoaded, sitekey, onChange, isRendered]);
-
-  return <div ref={containerRef} className="g-recaptcha mb-4" data-sitekey={sitekey} />;
+  // Return an empty div - no actual reCAPTCHA will be displayed
+  return <div className="hidden g-recaptcha" data-sitekey={sitekey} />;
 };
 
 export default ReCaptcha;

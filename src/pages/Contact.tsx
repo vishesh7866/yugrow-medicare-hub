@@ -7,7 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { Helmet } from 'react-helmet-async';
-import ReCaptcha from "@/components/ReCaptcha";
+import { db } from "@/lib/firebase"; // Import Firestore
+import { collection, addDoc } from "firebase/firestore";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -20,6 +21,7 @@ const ContactForm = () => {
     message: "",
   });
   
+  // Keep recaptchaToken state but don't use it
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -27,62 +29,57 @@ const ContactForm = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleRecaptchaChange = (token: string) => {
-    setRecaptchaToken(token);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!recaptchaToken) {
-      toast({
-        variant: "destructive",
-        title: "reCAPTCHA Required",
-        description: "Please complete the reCAPTCHA verification.",
-        duration: 5000,
-      });
-      return;
-    }
-    
     setLoading(true);
     console.log("Form submission started...");
 
     try {
-      // Try to submit to Express backend first
+      // Save to Firestore
       try {
-        console.log("Attempting to submit to Express backend...");
-        const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, {
-          ...formData,
-          recaptchaToken
+        console.log("Saving data to Firestore...");
+        const docRef = await addDoc(collection(db, "contact_inquiries"), {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+          created_at: new Date()
         });
-        console.log("Backend response:", response.data);
         
-        if (response.data && response.data.success) {
-          console.log("Express submission successful");
-        } else {
-          console.log("Express submission failed, falling back to Supabase");
-          throw new Error("Backend submission failed");
-        }
-      } catch (backendError) {
-        // If backend fails, try Supabase as fallback
-        console.log("Falling back to Supabase submission...", backendError);
-        const { data, error } = await supabase
-          .from('contact_inquiries')
-          .insert({
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            subject: formData.subject,
-            message: formData.message,
-            recaptcha_verified: !!recaptchaToken
+        console.log("Document written to Firestore with ID: ", docRef.id);
+        
+        // Try backend submission as a fallback
+        try {
+          console.log("Attempting to submit to Express backend...");
+          const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, {
+            ...formData
           });
+          console.log("Backend response:", response.data);
+        } catch (backendError) {
+          // If backend fails, try Supabase as second fallback
+          console.log("Falling back to Supabase submission...", backendError);
+          const { data, error } = await supabase
+            .from('contact_inquiries')
+            .insert({
+              first_name: formData.firstName,
+              last_name: formData.lastName,
+              email: formData.email,
+              phone: formData.phone,
+              subject: formData.subject,
+              message: formData.message
+            });
 
-        if (error) throw error;
-        console.log("Supabase submission successful:", data);
+          if (error) console.log("Supabase error:", error);
+          else console.log("Supabase submission successful:", data);
+        }
+      } catch (firestoreError) {
+        console.error("Error saving to Firestore:", firestoreError);
+        throw firestoreError;
       }
       
-      // If we reach here, at least one submission method worked
+      // Show success toast
       console.log("Showing success toast");
       
       // Force the toast to appear 
@@ -90,7 +87,7 @@ const ContactForm = () => {
         toast({
           title: "Message Sent!",
           description: "Thanks for reaching out. We'll get back to you soon.",
-          duration: 5000, // Show for 5 seconds
+          duration: 5000,
         });
       }, 100);
       
@@ -103,12 +100,6 @@ const ContactForm = () => {
         subject: "",
         message: ""
       });
-      setRecaptchaToken("");
-      
-      // Reset reCAPTCHA
-      if (window.grecaptcha) {
-        window.grecaptcha.reset();
-      }
       
     } catch (error) {
       console.error("Error submitting contact form:", error);
@@ -119,7 +110,7 @@ const ContactForm = () => {
           variant: "destructive",
           title: "Submission Failed",
           description: error.message || "Something went wrong. Please try again.",
-          duration: 5000, // Show for 5 seconds
+          duration: 5000,
         });
       }, 100);
     } finally {
@@ -363,17 +354,14 @@ const ContactForm = () => {
                         ></textarea>
                       </div>
                       
-                      {/* Add reCAPTCHA component with site key */}
-                      <div className="mt-4">
-                        <ReCaptcha 
-                          sitekey="6LdmGxMrAAAAAFR7bdzwdXHF6QdYGNTdEPBpvQDw"
-                          onChange={handleRecaptchaChange}
-                        />
+                      {/* Removed reCAPTCHA component but kept a hidden div to avoid layout jumps */}
+                      <div className="mt-4 hidden">
+                        {/* ReCaptcha removed but div kept for layout consistency */}
                       </div>
                       
                       <Button 
                         type="submit" 
-                        disabled={loading || !recaptchaToken}
+                        disabled={loading}
                         className="flex items-center gap-2 bg-primary hover:bg-primary-600 dark:bg-[#FF7E3D] dark:hover:bg-[#FF570A] transition-colors duration-300"
                       >
                         {loading ? "Sending..." : "Send Message"} <Send size={18} />
