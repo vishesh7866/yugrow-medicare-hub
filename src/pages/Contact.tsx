@@ -3,9 +3,7 @@ import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import axios from "axios";
 import { Helmet } from 'react-helmet-async';
 import { db } from "@/lib/firebase"; // Import Firestore
 import { collection, addDoc } from "firebase/firestore";
@@ -21,8 +19,6 @@ const ContactForm = () => {
     message: "",
   });
   
-  // Keep recaptchaToken state but don't use it
-  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -35,61 +31,26 @@ const ContactForm = () => {
     console.log("Form submission started...");
 
     try {
-      // Save to Firestore
-      try {
-        console.log("Saving data to Firestore...");
-        const docRef = await addDoc(collection(db, "contact_inquiries"), {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message,
-          created_at: new Date()
-        });
-        
-        console.log("Document written to Firestore with ID: ", docRef.id);
-        
-        // Try backend submission as a fallback
-        try {
-          console.log("Attempting to submit to Express backend...");
-          const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, {
-            ...formData
-          });
-          console.log("Backend response:", response.data);
-        } catch (backendError) {
-          // If backend fails, try Supabase as second fallback
-          console.log("Falling back to Supabase submission...", backendError);
-          const { data, error } = await supabase
-            .from('contact_inquiries')
-            .insert({
-              first_name: formData.firstName,
-              last_name: formData.lastName,
-              email: formData.email,
-              phone: formData.phone,
-              subject: formData.subject,
-              message: formData.message
-            });
-
-          if (error) console.log("Supabase error:", error);
-          else console.log("Supabase submission successful:", data);
-        }
-      } catch (firestoreError) {
-        console.error("Error saving to Firestore:", firestoreError);
-        throw firestoreError;
-      }
+      // Save directly to Firestore without any complex permissions
+      console.log("Saving data to Firestore...");
+      const docRef = await addDoc(collection(db, "contact_inquiries"), {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+        created_at: new Date()
+      });
+      
+      console.log("Document written to Firestore with ID: ", docRef.id);
       
       // Show success toast
-      console.log("Showing success toast");
-      
-      // Force the toast to appear 
-      setTimeout(() => {
-        toast({
-          title: "Message Sent!",
-          description: "Thanks for reaching out. We'll get back to you soon.",
-          duration: 5000,
-        });
-      }, 100);
+      toast({
+        title: "Message Sent!",
+        description: "Thanks for reaching out. We'll get back to you soon.",
+        duration: 5000,
+      });
       
       // Reset the form
       setFormData({
@@ -104,15 +65,12 @@ const ContactForm = () => {
     } catch (error) {
       console.error("Error submitting contact form:", error);
       
-      // Force the toast to appear
-      setTimeout(() => {
-        toast({
-          variant: "destructive",
-          title: "Submission Failed",
-          description: error.message || "Something went wrong. Please try again.",
-          duration: 5000,
-        });
-      }, 100);
+      toast({
+        variant: "destructive",
+        title: "Submission Failed",
+        description: "Something went wrong. Please try again later.",
+        duration: 5000,
+      });
     } finally {
       setLoading(false);
       console.log("Form submission completed");
@@ -352,11 +310,6 @@ const ContactForm = () => {
                           placeholder="Your message..."
                           required
                         ></textarea>
-                      </div>
-                      
-                      {/* Removed reCAPTCHA component but kept a hidden div to avoid layout jumps */}
-                      <div className="mt-4 hidden">
-                        {/* ReCaptcha removed but div kept for layout consistency */}
                       </div>
                       
                       <Button 
