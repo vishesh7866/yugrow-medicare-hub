@@ -14,6 +14,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { HelmetProvider } from "react-helmet-async";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import CookieConsent from "@/components/CookieConsent";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import ChatBot from "@/components/ChatBot";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
               <Route path="/faq" element={<FAQPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <WhatsAppButton />
+            <ChatBot />
             <CookieConsent />
             <Toaster />
           </BrowserRouter>
