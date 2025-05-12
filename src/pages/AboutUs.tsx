@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import BreadcrumbNav from '../components/layout/BreadcrumbNav';
 import WhyChooseUs from '../components/sections/WhyChooseUs';
 import OurApproach from '../components/sections/OurApproach';
 import VisionMission from '../components/sections/VisionMission';
@@ -18,38 +19,106 @@ import {
 import { Helmet } from 'react-helmet-async';
 
 const AboutUs = () => {
+  // Enhanced organizational schema for About page
+  const companySchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://yugrowpharmacy.com/#organization",
+    "name": "Yugrow Pharmacy",
+    "url": "https://yugrowpharmacy.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png",
+      "width": "180",
+      "height": "60"
+    },
+    "description": "Leader in generic medicine manufacturing with 3,500+ products and WHO-GMP certification, committed to enhancing healthcare accessibility across India.",
+    "foundingDate": "2010",
+    "foundingLocation": "Maharashtra, India",
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "value": ">100"
+    },
+    "award": "WHO-GMP Certified",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1346/14, Gala No. R-108, 1st Floor, Jai Matadi Compound, Kalher",
+      "addressLocality": "Bhiwandi",
+      "addressRegion": "Maharashtra",
+      "postalCode": "421302",
+      "addressCountry": "IN"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+918097074455",
+        "contactType": "customer service",
+        "email": "prm@yugrowpharmacy.com",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Hindi"]
+      }
+    ]
+  };
+
+  // Webpage schema
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Yugrow Pharmacy",
+    "description": "Learn about Yugrow Pharmacy's mission to provide affordable generic medicines across India.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Yugrow Pharmacy",
+      "url": "https://yugrowpharmacy.com"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://yugrowpharmacy.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About Us"
+        }
+      ]
+    },
+    "mainEntity": {
+      "@id": "https://yugrowpharmacy.com/#organization"
+    },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", ".text-lg"]
+    }
+  };
+
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <Helmet>
         <title>About Yugrow Pharmacy | Leading Generic Medicine Manufacturer</title>
         <meta name="description" content="Learn about Yugrow Pharmacy's mission to provide affordable generic medicines. WHO-GMP certified with 3,500+ products and expanding to 5,000 products." />
-        <meta name="keywords" content="about Yugrow Pharmacy, generic medicine manufacturer, WHO-GMP certified, pharmaceutical company India, medicine franchise" />
+        <meta name="keywords" content="about Yugrow Pharmacy, generic medicine manufacturer, WHO-GMP certified, pharmaceutical company India, medicine franchise, affordable healthcare" />
         <link rel="canonical" href="https://yugrowpharmacy.com/about" />
-        <script type="application/ld+json">
-        {`
-          {
-            "@context": "https://schema.org",
-            "@type": "AboutPage",
-            "mainEntity": {
-              "@type": "Organization",
-              "name": "Yugrow Pharmacy",
-              "description": "Leader in generic medicine manufacturing with 3,500+ products",
-              "foundingDate": "2010",
-              "foundingLocation": "Maharashtra, India"
-            },
-            "speakable": {
-              "@type": "SpeakableSpecification",
-              "cssSelector": ["h1", ".text-lg"]
-            }
-          }
-        `}
-        </script>
+        <meta property="og:title" content="About Yugrow Pharmacy | Leading Generic Medicine Manufacturer" />
+        <meta property="og:description" content="Learn about Yugrow Pharmacy's mission to provide affordable generic medicines. WHO-GMP certified with 3,500+ products." />
+        <meta property="og:url" content="https://yugrowpharmacy.com/about" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png" />
+        <script type="application/ld+json">{JSON.stringify(companySchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(webpageSchema)}</script>
       </Helmet>
       
       <Header />
       
+      {/* Breadcrumbs */}
+      <BreadcrumbNav title="About Us" />
+
       {/* Hero Section */}
-      <section className="pt-28 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-[#042652] to-[#021633] text-white">
+      <section className="pt-20 pb-16 md:pt-24 md:pb-24 bg-gradient-to-br from-[#042652] to-[#021633] text-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-6">Welcome to Yugrow Pharmacy</h1>

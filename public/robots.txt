@@ -1,27 +1,39 @@
 
+# Yugrow Pharmacy Robots.txt
+# Last updated: 2025-05-12
+
 # Allow all web crawlers (default)
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://yugrowpharmacy.com/sitemap.xml
-
 # Specific directives for major search engines
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 2
 
 User-agent: Yandexbot
 Allow: /
+Crawl-delay: 2
 
-# Social media crawlers
+# Social media crawlers - allow access for rich snippets
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-# Don't index any potential admin areas
+User-agent: LinkedInBot
+Allow: /
+
+# Don't index any potential admin or private areas
 Disallow: /admin/
+Disallow: /private/
+Disallow: /wp-admin/
+Disallow: /wp-login/
+
+# Sitemap locations
+Sitemap: https://yugrowpharmacy.com/sitemap.xml

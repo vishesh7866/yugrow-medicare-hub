@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import BreadcrumbNav from '@/components/layout/BreadcrumbNav';
 import { Helmet } from 'react-helmet-async';
 import {
   Accordion,
@@ -62,6 +63,56 @@ const FAQPage = () => {
     }
   ];
 
+  // Generate the structured data for the FAQs
+  const generateFaqsStructuredData = () => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+  };
+
+  // Additional structured data for the webpage
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Frequently Asked Questions - Yugrow Pharmacy",
+    "description": "Get answers to commonly asked questions about Yugrow Pharmacy's generic medicines, franchise opportunities, and business model.",
+    "url": "https://yugrowpharmacy.com/faq",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Yugrow Pharmacy",
+      "url": "https://yugrowpharmacy.com"
+    },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", "h2.text-3xl"]
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://yugrowpharmacy.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Frequently Asked Questions"
+        }
+      ]
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -69,26 +120,18 @@ const FAQPage = () => {
         <meta name="description" content="Get answers to common questions about Yugrow Pharmacy's generic medicines, franchise opportunities, quality standards, and business model." />
         <meta name="keywords" content="Yugrow Pharmacy FAQ, generic medicine questions, franchise FAQ, medicine quality standards, pharmacy franchise investment" />
         <link rel="canonical" href="https://yugrowpharmacy.com/faq" />
-        <script type="application/ld+json">
-        {`
-          {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              ${faqs.map(faq => `{
-                "@type": "Question",
-                "name": "${faq.question}",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "${faq.answer.replace(/"/g, '\\"')}"
-                }
-              }`).join(',')}
-            ]
-          }
-        `}
-        </script>
+        <meta property="og:title" content="Frequently Asked Questions | Yugrow Pharmacy" />
+        <meta property="og:description" content="Answers to common questions about Yugrow Pharmacy's generic medicines and franchise opportunities." />
+        <meta property="og:url" content="https://yugrowpharmacy.com/faq" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(generateFaqsStructuredData())}</script>
+        <script type="application/ld+json">{JSON.stringify(webpageSchema)}</script>
       </Helmet>
       <Header />
+      
+      {/* Breadcrumb Navigation */}
+      <BreadcrumbNav title="Frequently Asked Questions" />
+      
       <main className="pt-20 min-h-screen">
         <section className="py-16 md:py-24 bg-gradient-to-b from-[#042652] to-[#021633] text-white">
           <div className="container mx-auto px-4 md:px-6">
@@ -112,7 +155,7 @@ const FAQPage = () => {
                 <div className="bg-[#F5F7FA] dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700">
                   <Accordion type="single" collapsible className="w-full">
                     {faqs.map((faq, index) => (
-                      <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 dark:border-gray-700">
+                      <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 dark:border-gray-700" data-faq-item>
                         <AccordionTrigger className="text-left font-medium text-gray-900 dark:text-white py-4">
                           {faq.question}
                         </AccordionTrigger>

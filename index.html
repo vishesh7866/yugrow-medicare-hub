@@ -12,25 +12,41 @@
     <meta name="author" content="Yugrow Pharmacy" />
     <link rel="canonical" href="https://yugrowpharmacy.com" />
 
+    <!-- Preconnect to critical domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Open Graph (Facebook, LinkedIn) -->
     <meta property="og:title" content="Yugrow Pharmacy - Leading Generic Medicine Manufacturer | Affordable Healthcare" />
     <meta property="og:description" content="Providing high-quality, affordable generic medicines to enhance healthcare accessibility across India. WHO-GMP certified pharmaceutical manufacturing." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yugrowpharmacy.com" />
-    <meta property="og:image" content="https://yugrowpharmacy.com/images/og-image.jpg" />
+    <meta property="og:image" content="https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png" />
+    <meta property="og:image:alt" content="Yugrow Pharmacy logo" />
+    <meta property="og:site_name" content="Yugrow Pharmacy" />
+    <meta property="og:locale" content="en_US" />
     
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@yugrowpharmacy" />
     <meta name="twitter:title" content="Yugrow Pharmacy - Leading Generic Medicine Manufacturer" />
     <meta name="twitter:description" content="High-quality, affordable generic medicines to improve healthcare accessibility. WHO-GMP certified manufacturer." />
-    <meta name="twitter:image" content="https://yugrowpharmacy.com/images/twitter-image.jpg" />
+    <meta name="twitter:image" content="https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png" />
+    <meta name="twitter:image:alt" content="Yugrow Pharmacy logo" />
 
     <!-- Enhanced SEO Meta Tags -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="geo.region" content="IN" />
     <meta name="geo.placename" content="India" />
     <meta name="theme-color" content="#076FD8" />
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
 
     <!-- Script to define global onRecaptchaLoad function but don't load recaptcha -->
     <script>
@@ -53,6 +69,44 @@
       setTimeout(() => {
         window.onRecaptchaLoad();
       }, 100);
+    </script>
+
+    <!-- Schema.org Structured Data for Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Yugrow Pharmacy",
+        "url": "https://yugrowpharmacy.com",
+        "logo": "https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png",
+        "description": "Leading manufacturer of affordable generic medicines for enhanced healthcare accessibility across India.",
+        "foundingDate": "2010",
+        "founders": [{
+          "@type": "Person",
+          "name": "Yugrow Pharmacy Founder"
+        }],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1346/14, Gala No. R-108, 1st Floor, Jai Matadi Compound, Kalher",
+          "addressLocality": "Bhiwandi",
+          "addressRegion": "Maharashtra",
+          "postalCode": "421302",
+          "addressCountry": "IN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+918097074455",
+          "contactType": "customer service",
+          "email": "prm@yugrowpharmacy.com",
+          "availableLanguage": ["English", "Hindi"]
+        },
+        "sameAs": [
+          "https://www.facebook.com/yugrowpharmacy",
+          "https://twitter.com/yugrowpharmacy",
+          "https://www.linkedin.com/company/yugrow-pharmacy",
+          "https://www.instagram.com/yugrowpharmacy"
+        ]
+      }
     </script>
 
     <!-- Favicon -->

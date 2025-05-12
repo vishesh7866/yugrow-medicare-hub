@@ -1,45 +1,65 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
    <url>
       <loc>https://yugrowpharmacy.com/</loc>
-      <lastmod>2025-04-03</lastmod>
-      <changefreq>monthly</changefreq>
+      <lastmod>2025-05-12</lastmod>
+      <changefreq>weekly</changefreq>
       <priority>1.0</priority>
+      <image:image>
+         <image:loc>https://yugrowpharmacy.com/lovable-uploads/newyugrowlogo.png</image:loc>
+         <image:title>Yugrow Pharmacy Logo</image:title>
+         <image:caption>Official logo of Yugrow Pharmacy</image:caption>
+      </image:image>
    </url>
    <url>
       <loc>https://yugrowpharmacy.com/about</loc>
-      <lastmod>2025-04-03</lastmod>
+      <lastmod>2025-05-12</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
+      <image:image>
+         <image:loc>https://yugrowpharmacy.com/lovable-uploads/952cd23d-98d0-47d1-8671-467817c3da76.png</image:loc>
+         <image:title>Yugrow Pharmacy Management Team</image:title>
+      </image:image>
    </url>
    <url>
       <loc>https://yugrowpharmacy.com/contact</loc>
-      <lastmod>2025-04-03</lastmod>
+      <lastmod>2025-05-12</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>
    <url>
       <loc>https://yugrowpharmacy.com/csr</loc>
-      <lastmod>2025-04-03</lastmod>
+      <lastmod>2025-05-12</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
+      <image:image>
+         <image:loc>https://yugrowpharmacy.com/lovable-uploads/csr.mov</image:loc>
+         <image:title>Yugrow CSR Initiatives</image:title>
+      </image:image>
    </url>
    <url>
       <loc>https://yugrowpharmacy.com/partner</loc>
-      <lastmod>2025-04-03</lastmod>
+      <lastmod>2025-05-12</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.9</priority>
    </url>
    <url>
       <loc>https://yugrowpharmacy.com/careers</loc>
-      <lastmod>2025-04-03</lastmod>
+      <lastmod>2025-05-12</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
    </url>
    <url>
+      <loc>https://yugrowpharmacy.com/our-team</loc>
+      <lastmod>2025-05-12</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   <url>
       <loc>https://yugrowpharmacy.com/faq</loc>
-      <lastmod>2025-04-03</lastmod>
+      <lastmod>2025-05-12</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>
