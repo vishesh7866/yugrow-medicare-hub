@@ -22,6 +22,13 @@ interface BreadcrumbNavProps {
   }>;
 }
 
+interface BreadcrumbItemElement {
+  "@type": string;
+  "position": number;
+  "name": string;
+  "item"?: string;
+}
+
 const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ title, customPaths }) => {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x) => x);
@@ -39,7 +46,7 @@ const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ title, customPaths }) => 
 
   // Generate structured data for breadcrumbs
   const generateBreadcrumbStructuredData = () => {
-    const itemListElement = [
+    const itemListElement: BreadcrumbItemElement[] = [
       {
         "@type": "ListItem",
         "position": 1,
@@ -60,10 +67,12 @@ const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ title, customPaths }) => 
             "item": `https://yugrowpharmacy.com${path.path}`
           });
         } else {
+          // For the current page, also include the item property with the current URL
           itemListElement.push({
             "@type": "ListItem",
             "position": index + 2,
-            "name": path.name
+            "name": path.name,
+            "item": `https://yugrowpharmacy.com${path.path}`
           });
         }
       });
@@ -74,20 +83,13 @@ const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ title, customPaths }) => 
         const isLast = index === pathnames.length - 1;
         const pageTitle = pathTitles[name] || name.charAt(0).toUpperCase() + name.slice(1);
         
-        if (isLast) {
-          itemListElement.push({
-            "@type": "ListItem",
-            "position": index + 2,
-            "name": title || pageTitle
-          });
-        } else {
-          itemListElement.push({
-            "@type": "ListItem",
-            "position": index + 2,
-            "name": pageTitle,
-            "item": `https://yugrowpharmacy.com${currentPath}`
-          });
-        }
+        // Always include the item property, even for the last item
+        itemListElement.push({
+          "@type": "ListItem",
+          "position": index + 2,
+          "name": isLast ? (title || pageTitle) : pageTitle,
+          "item": `https://yugrowpharmacy.com${currentPath}`
+        });
       });
     }
 
