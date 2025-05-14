@@ -12,25 +12,9 @@
     <meta name="author" content="Yugrow Pharmacy" />
     <link rel="canonical" href="https://yugrowpharmacy.com" />
 
-    <!-- Critical CSS Inline -->
-    <style>
-      /* Inline critical CSS for faster rendering */
-      body{margin:0;font-family:Inter,sans-serif}
-      .heading-xl{font-size:1.875rem;line-height:2.25rem;font-weight:700}
-      .bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}
-      .animate-pulse{animation:pulse 2s cubic-bezier(0.4,0,0.6,1) infinite}
-      @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
-    </style>
-
     <!-- Preconnect to critical domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" as="image" href="/lovable-uploads/newyugrowlogo.png" fetchpriority="high" />
-    <link rel="preload" as="image" href="/lovable-uploads/video-poster.jpg" fetchpriority="high" />
-    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiJ-Ek-_EeA.woff2" type="font/woff2" crossorigin />
     
     <!-- Google Fonts with display=swap for better performance -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -126,14 +110,14 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- Optimized script loading -->
-    <script type="module" src="/src/main.tsx" async></script>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module" defer></script>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

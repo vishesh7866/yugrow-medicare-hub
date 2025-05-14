@@ -1,12 +1,8 @@
 
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { CheckCircle } from 'lucide-react';
-import useAnimationOnScroll from '@/hooks/use-animation';
 
 const About = () => {
-  const [contentRef, isContentVisible] = useAnimationOnScroll<HTMLDivElement>();
-  const [imageRef, isImageVisible] = useAnimationOnScroll<HTMLDivElement>({ delay: 200 });
-
   return (
     <section className="section-padding bg-white dark:bg-gray-900 transition-colors duration-300" id="about">
       <div className="container mx-auto px-4 md:px-6">
@@ -18,45 +14,48 @@ const About = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Content side with optimized animation */}
-          <div 
-            ref={contentRef}
-            className={`space-y-6 ${isContentVisible ? 'opacity-100' : 'opacity-0 translate-y-8'} transition-all duration-700`}
-          >
+          <div className="space-y-6 animate-slide-in">
             <p className="text-gray-600 dark:text-gray-300">
               Yugrow Pharmacy LLP is a rapidly growing division of Johnlee Pharmaceuticals Pvt. Ltd., dedicated to providing affordable generic medicines without compromising on quality. Our mission is to make healthcare accessible to all Indians through our expansive network of outlets.
             </p>
             
             <div className="space-y-4">
-              <AboutPoint text="WHO-GMP Certified: All our manufacturing facilities meet the highest international standards." />
-              <AboutPoint text="ISO 9001-2015 Certified: We follow rigorous quality management systems." />
-              <AboutPoint text="Commitment to Affordability: Our generic medicines are priced 30-80% lower than branded alternatives." />
-              <AboutPoint text="Rapid Expansion: Growing network with 300+ successful outlets across India." />
+              <div className="flex items-start">
+                <CheckCircle className="text-primary dark:text-[#FF7E3D] mr-2 mt-1 flex-shrink-0" size={20} />
+                <p className="text-gray-700 dark:text-gray-200">
+                  <span className="font-semibold">WHO-GMP Certified:</span> All our manufacturing facilities meet the highest international standards.
+                </p>
+              </div>
+              <div className="flex items-start">
+                <CheckCircle className="text-primary dark:text-[#FF7E3D] mr-2 mt-1 flex-shrink-0" size={20} />
+                <p className="text-gray-700 dark:text-gray-200">
+                  <span className="font-semibold">ISO 9001-2015 Certified:</span> We follow rigorous quality management systems.
+                </p>
+              </div>
+              <div className="flex items-start">
+                <CheckCircle className="text-primary dark:text-[#FF7E3D] mr-2 mt-1 flex-shrink-0" size={20} />
+                <p className="text-gray-700 dark:text-gray-200">
+                  <span className="font-semibold">Commitment to Affordability:</span> Our generic medicines are priced 30-80% lower than branded alternatives.
+                </p>
+              </div>
+              <div className="flex items-start">
+                <CheckCircle className="text-primary dark:text-[#FF7E3D] mr-2 mt-1 flex-shrink-0" size={20} />
+                <p className="text-gray-700 dark:text-gray-200">
+                  <span className="font-semibold">Rapid Expansion:</span> Growing network with 300+ successful outlets across India.
+                </p>
+              </div>
             </div>
           </div>
           
-          {/* Image side with optimized loading & animation */}
-          <div 
-            ref={imageRef}
-            className={`relative ${isImageVisible ? 'opacity-100' : 'opacity-0 translate-y-8'} transition-all duration-700 delay-300`}
-          >
+          <div className="relative animate-fade-in">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-300 to-primary-500 dark:from-[#FF7E3D] dark:to-[#FF570A] rounded-2xl blur opacity-30"></div>
             <div className="relative h-full">
               <div className="aspect-video rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg relative">
-                <picture>
-                  <source
-                    type="image/webp" 
-                    srcSet="/lovable-uploads/pharmacy-facility.webp"
-                  />
-                  <img 
-                    src="/lovable-uploads/pharmacy-facility.jpg" 
-                    alt="Yugrow Pharmacy facility"
-                    width="800"
-                    height="450"
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
-                </picture>
+                <img 
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" 
+                  alt="Yugrow Pharmacy facility" 
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="flex items-center space-x-2">
@@ -76,13 +75,5 @@ const About = () => {
     </section>
   );
 };
-
-// Extracted AboutPoint component for better maintenance
-const AboutPoint = ({ text }: { text: string }) => (
-  <div className="flex items-start">
-    <CheckCircle className="text-primary dark:text-[#FF7E3D] mr-2 mt-1 flex-shrink-0" size={20} />
-    <p className="text-gray-700 dark:text-gray-200">{text}</p>
-  </div>
-);
 
 export default About;

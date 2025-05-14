@@ -11,31 +11,29 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import BreadcrumbNav from '../components/layout/BreadcrumbNav';
 import { useTheme } from '@/components/theme-provider';
-import { useOptimizedMouseTracking } from '@/hooks/use-animation';
-import { setupLazyLoading } from '@/lib/performance';
 
 const Index = () => {
   const { theme, setTheme } = useTheme();
-  
-  // Use optimized mouse tracking for better performance
-  useOptimizedMouseTracking();
 
   useEffect(() => {
     // Force dark mode only if not already set
     const userPref = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+
     if (!userPref) {
       setTheme('dark');
       localStorage.setItem('theme', 'dark');
     }
-    
-    // Set up lazy loading for images
-    setupLazyLoading();
-    
-    // Mark page as loaded after initial render
-    // This triggers CSS animations for better perceived performance
-    requestIdleCallback(() => {
-      document.documentElement.classList.add('js-loaded');
-    });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      document.documentElement.style.setProperty('--mouse-x', x.toString());
+      document.documentElement.style.setProperty('--mouse-y', y.toString());
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [setTheme]);
 
   // Enhanced structured data
@@ -141,8 +139,8 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       </Helmet>
 
-      {/* Background animation - optimized for performance */}
-      <div className="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      {/* Background animation */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#042652]/10 dark:bg-[#076FD8]/20 rounded-full filter blur-3xl animate-float"></div>
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#FF7E3D]/10 dark:bg-[#FF7E3D]/20 rounded-full filter blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
@@ -150,28 +148,15 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        {/* Add content-visibility to off-screen sections for better paint performance */}
-        <div className="off-screen">
-          <About />
-          <Statistics />
-          <ProductCategories />
-          <Testimonials />
-          <CallToAction />
-        </div>
+        <About />
+        <Statistics />
+        <ProductCategories />
+        <Testimonials />
+        <CallToAction />
       </main>
       <Footer />
     </div>
   );
 };
-
-// Polyfill requestIdleCallback for browsers that don't support it
-if (!('requestIdleCallback' in window)) {
-  (window as any).requestIdleCallback = (callback: Function) => {
-    return setTimeout(() => callback(), 1);
-  };
-  (window as any).cancelIdleCallback = (id: number) => {
-    clearTimeout(id);
-  };
-}
 
 export default Index;
