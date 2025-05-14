@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -107,6 +108,28 @@ const Footer = () => {
                 <Phone className="mr-2 h-4 w-4" />
                 +91 80970 74455
               </p>
+            </div>
+            
+            {/* Social Media Icons */}
+            <div className="mt-4 flex space-x-4">
+              <a 
+                href="https://www.facebook.com/profile.php?id=61573660053420" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-[#1877F2] transition-colors duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.instagram.com/p/DJB4B9bN1y6/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-300 hover:text-[#E4405F] transition-colors duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
             </div>
           </div>
         </div>
