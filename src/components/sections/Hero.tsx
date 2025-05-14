@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const Hero = () => {
   return (
@@ -67,25 +68,27 @@ const HeroImage = () => (
         {/* Video optimizations: 
            1. Added poster image to show immediately while video loads
            2. Added preload="metadata" to only fetch video metadata initially
-           3. Added fetchpriority="low" for non-blocking loading 
+           3. Removed fetchpriority attribute as it's not supported in TS definitions
            4. Added width/height to prevent layout shifts
            5. Added type attribute for better browser handling
         */}
-        <video
-          src="/lovable-uploads/Final%20Render_1.mp4"
-          poster="/lovable-uploads/video-poster.jpg"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          fetchpriority="low"
-          width="640"
-          height="360"
-          type="video/mp4"
-          className="w-full h-80 md:h-96 object-cover opacity-90"
-          aria-label="Yugrow Pharmacy pharmaceutical manufacturing video"
-        />
+        <AspectRatio ratio={16/9} className="w-full">
+          <video
+            src="/lovable-uploads/Final%20Render_1.mp4"
+            poster="/lovable-uploads/video-poster.jpg"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            loading="lazy"
+            width="640"
+            height="360"
+            type="video/mp4"
+            className="w-full h-full object-cover opacity-90"
+            aria-label="Yugrow Pharmacy pharmaceutical manufacturing video"
+          />
+        </AspectRatio>
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6"></div>
       </div>
 
