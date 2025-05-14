@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -68,7 +67,7 @@ const HeroImage = () => (
         {/* Video optimizations: 
            1. Added poster image to show immediately while video loads
            2. Added preload="metadata" to only fetch video metadata initially
-           3. Removed fetchpriority attribute as it's not supported in TS definitions
+           3. Removed loading attribute as it's not supported for video elements
            4. Added width/height to prevent layout shifts
            5. Added type attribute for better browser handling
         */}
@@ -81,7 +80,6 @@ const HeroImage = () => (
             muted
             playsInline
             preload="metadata"
-            loading="lazy"
             width="640"
             height="360"
             type="video/mp4"
