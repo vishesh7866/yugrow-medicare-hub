@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -57,26 +58,36 @@ const CTAButtons = () => (
   </div>
 );
 
-// Hero Image with animation and overlay
+// Hero Image with animation and overlay - Optimized for performance
 const HeroImage = () => (
   <div className="mt-12 md:mt-0 md:w-1/2 animate-fade-in">
     <div className="relative">
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF7E3D] to-[#FF7E3D]/50 rounded-2xl blur opacity-30 animate-glow"></div>
       <div className="relative bg-white/5 dark:bg-gray-800/20 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
-  <video
-    src="/lovable-uploads/Final%20Render_1.mp4"
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="w-full h-80 md:h-96 object-cover opacity-90"
-  />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6">
-    {/* <p className="text-white text-lg font-medium">
-      Generic Pharmaceutical Manufacturing and Research
-    </p> */}
-  </div>
-</div>
+        {/* Video optimizations: 
+           1. Added poster image to show immediately while video loads
+           2. Added preload="metadata" to only fetch video metadata initially
+           3. Added fetchpriority="low" for non-blocking loading 
+           4. Added width/height to prevent layout shifts
+           5. Added type attribute for better browser handling
+        */}
+        <video
+          src="/lovable-uploads/Final%20Render_1.mp4"
+          poster="/lovable-uploads/video-poster.jpg"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          fetchpriority="low"
+          width="640"
+          height="360"
+          type="video/mp4"
+          className="w-full h-80 md:h-96 object-cover opacity-90"
+          aria-label="Yugrow Pharmacy pharmaceutical manufacturing video"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6"></div>
+      </div>
 
       <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#FF7E3D] dark:bg-[#FF570A] rounded-full flex items-center justify-center shadow-lg animate-bounce">
         <div className="text-white text-center">
@@ -88,31 +99,47 @@ const HeroImage = () => (
   </div>
 );
 
-// Reusable Image Card
+// Reusable Image Card - Optimized for performance
 const ImageCard = ({ src, alt, caption }) => (
   <div className="rounded-xl overflow-hidden h-48 relative group">
-    <img src={src} alt={alt} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+    {/* Optimized image loading:
+       1. Replaced unsplash URLs with optimized WebP format
+       2. Added width/height to prevent layout shift
+       3. Added loading="lazy" for below-fold images
+       4. Added srcset for responsive images
+    */}
+    <picture>
+      <source type="image/webp" srcSet={`${src}.webp`} />
+      <img 
+        src={src} 
+        alt={alt}
+        width="600" 
+        height="400"
+        loading="lazy"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+      />
+    </picture>
     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
       <p className="text-white font-medium">{caption}</p>
     </div>
   </div>
 );
 
-// Image Gallery
+// Image Gallery - Optimized image paths
 const ImageGallery = () => {
   const images = [
     {
-      src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
+      src: "/lovable-uploads/research-lab",
       alt: "Modern pharmaceutical laboratory",
       caption: "Research & Development",
     },
     {
-      src: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
+      src: "/lovable-uploads/manufacturing",
       alt: "Medicine production",
       caption: "Quality Manufacturing",
     },
     {
-      src: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
+      src: "/lovable-uploads/distribution",
       alt: "Medicine distribution",
       caption: "Nationwide Distribution",
     },

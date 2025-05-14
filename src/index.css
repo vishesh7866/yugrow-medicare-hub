@@ -57,6 +57,7 @@
 
   body {
     @apply bg-background text-foreground;
+    text-rendering: optimizeSpeed;
   }
 
   /* Typography styles */
@@ -80,6 +81,21 @@
   .section-padding {
     @apply py-12 md:py-24;
   }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Content-visibility for better paint performance */
+  .off-screen {
+    content-visibility: auto;
+  }
 }
 
 @layer components {
@@ -99,39 +115,33 @@
 }
 
 @layer utilities {
+  /* Performance optimized animations */
   @keyframes float {
-    0% {
-      transform: translateY(0) translateX(0);
+    0%, 100% {
+      transform: translate(0);
     }
-    33% {
-      transform: translateY(-10px) translateX(10px);
-    }
-    66% {
-      transform: translateY(10px) translateX(-10px);
-    }
-    100% {
-      transform: translateY(0) translateX(0);
+    50% {
+      transform: translate(0, -10px);
     }
   }
   
   @keyframes glow {
-    0% {
+    0%, 100% {
       opacity: 0.3;
     }
     50% {
       opacity: 0.6;
     }
-    100% {
-      opacity: 0.3;
-    }
   }
   
   .animate-float {
     animation: float 15s ease-in-out infinite;
+    will-change: transform;
   }
   
   .animate-glow {
     animation: glow 3s ease-in-out infinite;
+    will-change: opacity;
   }
   
   @keyframes slide-in {
@@ -176,19 +186,40 @@
     }
   }
   
-  .animate-slide-in {
+  /* Initial load doesn't animate elements not in view */
+  html.js-loaded .animate-slide-in {
     animation: slide-in 0.6s ease-out forwards;
   }
   
-  .animate-slide-up {
+  html.js-loaded .animate-slide-up {
     animation: slide-up 0.6s ease-out forwards;
   }
   
-  .animate-scale-in {
+  html.js-loaded .animate-scale-in {
     animation: scale-in 0.5s ease-out forwards;
   }
   
-  .animate-fade-in {
+  html.js-loaded .animate-fade-in {
     animation: fade-in 0.6s ease-out forwards;
+  }
+
+  /* Instead of animating on initial load, start invisible and animate only when visible */
+  .animate-slide-in,
+  .animate-slide-up,
+  .animate-scale-in,
+  .animate-fade-in {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-on-scroll {
+      opacity: 0;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
