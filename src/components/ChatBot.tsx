@@ -34,6 +34,9 @@ const ChatBot: React.FC = () => {
       if (newIsOpen && !hasPlayedAudio) {
         playAudio();
         setHasPlayedAudio(true);
+      } else if (!newIsOpen) {
+        // Stop audio when chat is closed
+        stopAudio();
       }
       
       return newIsOpen;
@@ -50,6 +53,17 @@ const ChatBot: React.FC = () => {
       }
     } catch (err) {
       console.log("Error playing audio:", err);
+    }
+  };
+
+  const stopAudio = () => {
+    try {
+      if (audioRef.current && !audioRef.current.paused) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    } catch (err) {
+      console.log("Error stopping audio:", err);
     }
   };
 
