@@ -13,6 +13,8 @@ const ChatBot: React.FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [hasPlayedAudio, setHasPlayedAudio] = useState(false);
 
   // Predefined quick questions for users to click
   const quickQuestions = [
@@ -25,7 +27,30 @@ const ChatBot: React.FC = () => {
   ];
 
   const toggleChat = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen(prev => {
+      const newIsOpen = !prev;
+      
+      // Play audio when chat is opened, but only once
+      if (newIsOpen && !hasPlayedAudio) {
+        playAudio();
+        setHasPlayedAudio(true);
+      }
+      
+      return newIsOpen;
+    });
+  };
+
+  const playAudio = () => {
+    try {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(err => {
+          console.log("Audio play failed:", err);
+        });
+      }
+    } catch (err) {
+      console.log("Error playing audio:", err);
+    }
   };
 
   // Auto-scroll to bottom of messages
@@ -318,6 +343,13 @@ const ChatBot: React.FC = () => {
 
   return (
     <div className="fixed bottom-4 right-6 z-40">
+      {/* Hidden audio element */}
+      <audio 
+        ref={audioRef} 
+        src="/lovable-uploads/yugrowchatai.mp3" 
+        preload="auto" 
+      />
+      
       <Button
         onClick={toggleChat}
         className={cn(
