@@ -1,136 +1,42 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { Play, ArrowRight, Heart, Users, Award, Globe } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Helmet } from 'react-helmet-async';
 
-interface VideoData {
-  video_id: string;
-  status: string;
-  download_url?: string;
-  landing_page_url?: string;
-}
-
 const OrganizationVideo = () => {
-  const [videoData, setVideoData] = useState<VideoData | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const stats = [
+    { icon: <Users className="h-6 w-6" />, value: "10,000+", label: "Happy Customers" },
+    { icon: <Award className="h-6 w-6" />, value: "500+", label: "Products Available" },
+    { icon: <Globe className="h-6 w-6" />, value: "50+", label: "Cities Served" },
+    { icon: <Heart className="h-6 w-6" />, value: "24/7", label: "Customer Support" }
+  ];
 
-  const fetchVideo = async () => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const response = await fetch('https://tavusapi.com/v2/videos', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "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"
-        },
-        body: JSON.stringify({
-          "replica_id": "r9d30b0e55ac",
-          "script": "Welcome to Yugrow Pharmacy—India's emerging healthcare destination where trust, quality, and accessibility come together to create a healthier tomorrow.\n\nAt Yugrow, we believe that healthcare should be simple, reliable, and within reach for everyone. That belief drives our mission to provide genuine medicines, wellness essentials, and personalized healthcare support to individuals and families across the country. Every order we fulfill is backed by professional expertise, strict quality control, and a deep understanding of what our customers truly need. Our commitment is not just to deliver medicines—but to deliver confidence, care, and convenience.\n\nYugrow Pharmacy was founded on a vision to reshape the way people access essential healthcare. In today's fast-paced world, we understand that timely delivery, affordability, and trust matter more than ever. With a growing network and a customer-first mindset, we're enabling seamless access to prescription medications, healthcare products, and expert advice—all from the comfort of your home.\n\nBut our mission doesn't end with retail. We are proud to invite ambitious individuals and entrepreneurs to grow with us. Through the Yugrow Franchise Program, we are building a network of health-focused business partners who share our passion for community wellness and sustainable impact.\n\nWhether you are an experienced pharmacy operator or someone looking to step into the world of healthcare entrepreneurship, Yugrow offers a unique opportunity. Our franchise model is designed to empower partners with full support—covering product sourcing, operational guidance, marketing, logistics, and technology. With low investment requirements and high growth potential, we ensure our franchisees are equipped for success from day one.\n\nAs a Yugrow franchisee, you don't just open a store—you become a vital part of our healthcare mission. Together, we're building a future where quality healthcare is not a privilege but a standard for all.\n\nJoin hands with us. Become a partner in care. And let's grow—together.\n\nYugrow Pharmacy. Your Health, Our Priority."
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Video API Response:', data);
-      setVideoData(data);
-    } catch (err) {
-      console.error('Error fetching video:', err);
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
-      setLoading(false);
+  const features = [
+    {
+      title: "Quality Assurance",
+      description: "Every product goes through rigorous quality checks to ensure safety and efficacy.",
+      gradient: "from-blue-400 to-blue-600"
+    },
+    {
+      title: "Expert Guidance",
+      description: "Our team of qualified pharmacists provides professional healthcare advice.",
+      gradient: "from-green-400 to-green-600"
+    },
+    {
+      title: "Nationwide Delivery",
+      description: "Fast and reliable delivery to your doorstep across India.",
+      gradient: "from-purple-400 to-purple-600"
+    },
+    {
+      title: "Affordable Healthcare",
+      description: "Making quality healthcare accessible and affordable for everyone.",
+      gradient: "from-orange-400 to-orange-600"
     }
-  };
-
-  useEffect(() => {
-    fetchVideo();
-  }, []);
-
-  const renderVideoContent = () => {
-    if (loading) {
-      return (
-        <div className="flex flex-col items-center justify-center py-12">
-          <Loader2 className="h-12 w-12 animate-spin text-[#FF7E3D] mb-4" />
-          <p className="text-lg text-muted-foreground">Generating your video...</p>
-          <p className="text-sm text-muted-foreground mt-2">This may take a few moments</p>
-        </div>
-      );
-    }
-
-    if (error) {
-      return (
-        <div className="flex flex-col items-center justify-center py-12">
-          <AlertCircle className="h-12 w-12 text-red-500 mb-4" />
-          <p className="text-lg text-red-600 mb-4">Error loading video</p>
-          <p className="text-sm text-muted-foreground mb-4">{error}</p>
-          <Button onClick={fetchVideo} variant="outline">
-            <RefreshCw className="h-4 w-4 mr-2" />
-            Try Again
-          </Button>
-        </div>
-      );
-    }
-
-    if (!videoData) {
-      return (
-        <div className="flex flex-col items-center justify-center py-12">
-          <p className="text-lg text-muted-foreground">No video data available</p>
-        </div>
-      );
-    }
-
-    return (
-      <div className="space-y-6">
-        <div className="text-center">
-          <h3 className="text-xl font-semibold mb-2">Video Status: {videoData.status}</h3>
-          <p className="text-sm text-muted-foreground">Video ID: {videoData.video_id}</p>
-        </div>
-
-        {videoData.status === 'completed' && videoData.download_url && (
-          <div className="aspect-video bg-black rounded-lg overflow-hidden">
-            <video 
-              controls 
-              className="w-full h-full"
-              src={videoData.download_url}
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        )}
-
-        {videoData.status === 'completed' && videoData.landing_page_url && (
-          <div className="text-center">
-            <Button asChild className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80">
-              <a href={videoData.landing_page_url} target="_blank" rel="noopener noreferrer">
-                <Play className="h-4 w-4 mr-2" />
-                View on Tavus
-              </a>
-            </Button>
-          </div>
-        )}
-
-        {videoData.status === 'processing' && (
-          <div className="text-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin text-[#FF7E3D] mx-auto mb-4" />
-            <p className="text-lg text-muted-foreground">Video is being processed...</p>
-            <Button onClick={fetchVideo} variant="outline" className="mt-4">
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Check Status
-            </Button>
-          </div>
-        )}
-      </div>
-    );
-  };
+  ];
 
   return (
     <>
@@ -139,62 +45,127 @@ const OrganizationVideo = () => {
         <meta name="description" content="Watch our story - Learn about Yugrow Pharmacy's mission, vision, and commitment to accessible healthcare for all." />
       </Helmet>
       
-      <div className="min-h-screen bg-gradient-to-br from-[#042652] via-[#076FD8] to-[#021633]">
+      <div className="min-h-screen bg-gradient-to-br from-[#042652] via-[#076FD8] to-[#021633] relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full animate-float"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-[#FF7E3D] rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute bottom-40 left-20 w-20 h-20 bg-white rounded-full animate-float" style={{ animationDelay: '4s' }}></div>
+          <div className="absolute bottom-20 right-40 w-28 h-28 bg-[#FF7E3D] rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        </div>
+
         <Header />
         
-        <main className="pt-20 pb-16">
+        <main className="pt-20 pb-16 relative z-10">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              {/* Header Section */}
-              <div className="text-center mb-12">
-                <h1 className="heading-xl text-white mb-6">
+            <div className="max-w-6xl mx-auto">
+              {/* Hero Section */}
+              <div className="text-center mb-16 animate-fade-in">
+                <h1 className="heading-xl text-white mb-6 animate-slide-up">
                   Our Story
                 </h1>
-                <p className="text-xl text-white/90 max-w-3xl mx-auto">
+                <p className="text-xl text-white/90 max-w-3xl mx-auto animate-slide-up" style={{ animationDelay: '0.2s' }}>
                   Discover Yugrow Pharmacy's journey, mission, and commitment to making 
                   quality healthcare accessible to everyone across India.
                 </p>
               </div>
 
-              {/* Video Card */}
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-white text-center">
-                    Welcome to Yugrow Pharmacy
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {renderVideoContent()}
-                </CardContent>
-              </Card>
-
-              {/* Additional Content */}
-              <div className="mt-12 grid md:grid-cols-2 gap-8">
-                <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                  <CardHeader>
-                    <CardTitle className="text-white">Our Mission</CardTitle>
+              {/* Video Section */}
+              <div className="mb-16 animate-scale-in" style={{ animationDelay: '0.4s' }}>
+                <Card className="bg-white/10 backdrop-blur-lg border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-3xl text-white text-center flex items-center justify-center gap-3">
+                      <Play className="h-8 w-8 text-[#FF7E3D]" />
+                      Welcome to Yugrow Pharmacy
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-white/90">
-                      To provide genuine medicines, wellness essentials, and personalized 
-                      healthcare support to individuals and families across India with 
-                      trust, quality, and accessibility at the core.
-                    </p>
+                  <CardContent className="p-8">
+                    <div className="aspect-video bg-black/20 rounded-xl overflow-hidden shadow-2xl border border-white/10">
+                      <video 
+                        controls 
+                        className="w-full h-full rounded-xl"
+                        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23042652;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF7E3D;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EYugrow Pharmacy%3C/text%3E%3C/svg%3E"
+                      >
+                        <source src="/lovable-uploads/67f0f5bc64.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
                   </CardContent>
                 </Card>
+              </div>
 
-                <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                  <CardHeader>
-                    <CardTitle className="text-white">Join Our Journey</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-white/90 mb-4">
-                      Become part of our healthcare mission through the Yugrow Franchise Program. 
-                      Together, we're building a future where quality healthcare is accessible to all.
+              {/* Stats Section */}
+              <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {stats.map((stat, index) => (
+                    <Card 
+                      key={index} 
+                      className="bg-white/10 backdrop-blur-lg border-white/20 text-center hover:bg-white/20 transition-all duration-300 hover:scale-105 animate-slide-up"
+                      style={{ animationDelay: `${0.8 + index * 0.1}s` }}
+                    >
+                      <CardContent className="p-6">
+                        <div className="text-[#FF7E3D] mb-3 flex justify-center">
+                          {stat.icon}
+                        </div>
+                        <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                        <div className="text-white/80 text-sm">{stat.label}</div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* Features Grid */}
+              <div className="mb-16 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+                <h2 className="text-3xl font-bold text-white text-center mb-12">Why Choose Yugrow?</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {features.map((feature, index) => (
+                    <Card 
+                      key={index}
+                      className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 animate-slide-up group"
+                      style={{ animationDelay: `${1.4 + index * 0.1}s` }}
+                    >
+                      <CardContent className="p-8">
+                        <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                          <div className="w-8 h-8 bg-white rounded-full"></div>
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
+                        <p className="text-white/80 leading-relaxed">{feature.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Section */}
+              <div className="text-center animate-scale-in" style={{ animationDelay: '1.8s' }}>
+                <Card className="bg-gradient-to-r from-[#FF7E3D] to-[#FF6B2C] border-none shadow-2xl">
+                  <CardContent className="p-12">
+                    <h2 className="text-3xl font-bold text-white mb-6">
+                      Ready to Join Our Healthcare Revolution?
+                    </h2>
+                    <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+                      Partner with us and become part of India's fastest-growing pharmacy network. 
+                      Together, we can make quality healthcare accessible to everyone.
                     </p>
-                    <Button asChild className="bg-[#FF7E3D] hover:bg-[#FF7E3D]/80">
-                      <a href="/partner">Learn More</a>
-                    </Button>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button 
+                        asChild 
+                        className="bg-white text-[#FF7E3D] hover:bg-white/90 text-lg px-8 py-3 hover:scale-105 transition-all duration-300"
+                      >
+                        <a href="/partner">
+                          Become a Partner
+                          <ArrowRight className="h-5 w-5 ml-2" />
+                        </a>
+                      </Button>
+                      <Button 
+                        asChild 
+                        variant="outline"
+                        className="border-white text-white hover:bg-white hover:text-[#FF7E3D] text-lg px-8 py-3 hover:scale-105 transition-all duration-300"
+                      >
+                        <a href="/contact">Contact Us</a>
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
