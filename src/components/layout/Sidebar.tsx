@@ -19,7 +19,8 @@ import {
   Briefcase,
   HelpCircle,
   Menu,
-  ChevronRight
+  ChevronRight,
+  Play
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/theme-provider';
@@ -45,6 +46,11 @@ const Sidebar = () => {
       label: "About Us",
       href: "/about",
       icon: <Info className="h-5 w-5" />
+    },
+    {
+      label: "Our Story",
+      href: "/our-story",
+      icon: <Play className="h-5 w-5" />
     },
     {
       label: "Contact",

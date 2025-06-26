@@ -9,6 +9,7 @@ import Careers from "./pages/Careers";
 import OurTeam from "./pages/OurTeam";
 import NotFound from "./pages/NotFound";
 import FAQPage from "./pages/FAQPage";
+import OrganizationVideo from "./pages/OrganizationVideo";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { HelmetProvider } from "react-helmet-async";
@@ -32,6 +33,7 @@ function App() {
               <Route path="/careers" element={<Careers />} />
               <Route path="/our-team" element={<OurTeam />} />
               <Route path="/faq" element={<FAQPage />} />
+              <Route path="/our-story" element={<OrganizationVideo />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <WhatsAppButton />
