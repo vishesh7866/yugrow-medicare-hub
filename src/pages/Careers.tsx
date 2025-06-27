@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 const Careers = () => {
@@ -46,40 +45,8 @@ const Careers = () => {
     setIsSubmitting(true);
     
     try {
-      let resumeUrl = null;
-      
-      // 1. If there's a resume file, upload it to Storage first
-      if (formData.resume) {
-        const fileExt = formData.resume.name.split('.').pop();
-        const fileName = `${Date.now()}.${fileExt}`;
-        
-        const { data: uploadData, error: uploadError } = await supabase.storage
-          .from('resumes')
-          .upload(fileName, formData.resume);
-          
-        if (uploadError) throw uploadError;
-        
-        // Get the public URL
-        const { data: publicUrlData } = supabase.storage
-          .from('resumes')
-          .getPublicUrl(fileName);
-          
-        resumeUrl = publicUrlData.publicUrl;
-      }
-      
-      // 2. Store the application data
-      const { data, error } = await supabase
-        .from('job_applications')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          position: formData.position,
-          resume_url: resumeUrl,
-          cover_letter: formData.coverLetter
-        });
-        
-      if (error) throw error;
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
         title: "Application Submitted!",
@@ -101,7 +68,7 @@ const Careers = () => {
       toast({
         variant: "destructive",
         title: "Submission Failed",
-        description: error.message || "Something went wrong. Please try again.",
+        description: "Something went wrong. Please try again.",
       });
       console.error("Error submitting job application:", error);
     } finally {

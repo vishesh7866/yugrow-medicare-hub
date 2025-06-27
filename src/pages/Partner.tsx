@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { CheckCircle, Store, ArrowRight, BarChart3, Calendar, UserPlus, MapPin, CreditCard, Briefcase, Award, Building, Phone, Mail, Users, FileCheck, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,7 +5,6 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { useTheme } from '@/components/theme-provider';
 import { motion } from 'framer-motion';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from "@/hooks/use-toast";
 import ReCaptcha from "@/components/ReCaptcha";
 
@@ -56,18 +54,8 @@ const Partner = () => {
     setIsSubmitting(true);
     
     try {
-      const { data, error } = await supabase
-        .from('franchise_inquiries')
-        .insert({
-          full_name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email,
-          location: formData.location,
-          message: formData.message,
-          recaptcha_verified: !!recaptchaToken
-        });
-        
-      if (error) throw error;
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
         title: "Inquiry Submitted!",
